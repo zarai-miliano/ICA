@@ -1,0 +1,8 @@
+.hero{background:linear-gradient(110deg,rgba(6,46,56,.95),rgba(7,61,64,.65)),url("chinchaycocha.jpg") center 48%/cover no-repeat}
+.forecast-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:16px;margin:0 0 18px}
+.forecast-stats div{padding:14px 18px;border-radius:10px;background:#e9f3ef}
+.forecast-stats strong,.forecast-stats span{display:block}
+.forecast-stats strong{font-size:2rem;line-height:1.15}
+#pronostico summary{cursor:pointer;font-weight:700}
+#pronostico details[open] summary{margin-bottom:10px}
+@media(max-width:550px){.top{flex-wrap:wrap;padding-block:10px}nav{flex-wrap:wrap}}
