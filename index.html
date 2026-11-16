@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Demostración del modelo ICA-PE entrenado con los monitoreos del lago Chinchaycocha.">
-  <title>ICA Chinchaycocha</title>
+  <title>Índice de calidad de Agua</title>
   <link rel="stylesheet" href="estilos.css">
   <link rel="stylesheet" href="pronostico.css">
   <script defer src="modelos.js"></script>
@@ -12,12 +12,11 @@
   <script defer src="app.js"></script>
 </head>
 <body>
-  <header class="top"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span> Chinchaycocha</a><nav aria-label="Secciones"><a href="#simulador">Simulador</a><a href="#evidencia">Evidencia</a><a href="#pronostico">Pronóstico</a></nav></header>
+  <header class="top"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span> Chinchaycocha</a><nav aria-label="Secciones"><a href="#simulador">Simulador</a><a href="#pronostico">Pronóstico</a></nav></header>
   <main id="inicio">
     <section class="hero">
       <div class="wrap hero-grid">
-        <div><p class="eyebrow">Lago Chinchaycocha · Junín</p><h1>Calidad del agua<br>en un índice.</h1><p class="intro">Explora cómo una red neuronal estima el ICA-PE y qué cambia cuando se miden solo tres parámetros.</p><a class="hero-button" href="#simulador">Probar el modelo <span aria-hidden="true">↘</span></a></div>
-        <aside class="hero-stat"><strong>213</strong><span>monitoreos históricos</span><div class="stat-line"><span>45 episodios en prueba retrospectiva</span></div></aside>
+        <div><p class="eyebrow">Lago Chinchaycocha · Junín</p><h1>Índice de calidad de Agua</h1><p class="intro">Explora cómo una red neuronal estima el ICA-PE y qué cambia cuando se miden solo tres parámetros.</p><a class="hero-button" href="#simulador">Probar el modelo <span aria-hidden="true">↘</span></a></div>
       </div>
     </section>
     <section id="pronostico" class="wrap section">
@@ -71,20 +70,6 @@
         </div>
         <p class="small ica-note">Adaptado del cuadro compartido. Los cortes de 45, 65, 80 y 95 se aplican al ICA antes de redondearlo.</p>
       </section>
-    </section>
-    <section id="evidencia" class="evidence">
-      <div class="wrap section">
-        <p class="eyebrow">213 monitoreos · validación por campañas</p><h2>¿Qué se puede estimar mejor?</h2>
-        <p class="section-intro">La ANN se compara con la mediana de las concentraciones de entrenamiento. El error de cada parámetro se calcula sobre mediciones cuantificadas y se expresa en su unidad.</p>
-        <div class="insight"><strong>Sólidos suspendidos totales fue la única salida que mejoró frente a la mediana en ambas evaluaciones.</strong><p>El resultado se apoya en 35 casos cuantificados de desarrollo y 5 de prueba. Oxígeno disuelto y pH tienen más datos, con una mejora frente a la mediana solo en prueba.</p></div>
-        <div class="table-scroll"><table><caption>Error absoluto medio por parámetro · valores menores indican menor error</caption><thead><tr><th>Parámetro</th><th>Cuantificados<br>desarrollo / prueba</th><th>ANN / mediana<br>desarrollo</th><th>ANN / mediana<br>prueba</th></tr></thead><tbody id="scores"></tbody></table></div>
-        <p class="section-intro">Con tres entradas, el ICA calculado a partir de las nueve estimaciones obtuvo un MAE de 0,45 puntos y un RMSE de 1,73 en 45 monitoreos retrospectivos. La fórmula puede dar el mismo ICA con concentraciones distintas cuando ambas quedan dentro del ECA.</p>
-        <h3>Relaciones en el histórico</h3>
-        <p class="section-intro">Pearson compara las mediciones cuantificadas por pares. El cálculo con L/2 muestra cómo cambia la asociación al incluir sustituciones para los resultados «&lt;».</p>
-        <label class="select-label" for="relation">Comparar con</label> <select id="relation"></select>
-        <div class="table-scroll"><table><thead><tr><th>Parámetro</th><th>r cuantificados</th><th>Pares cuantificados</th><th>r con L/2</th></tr></thead><tbody id="relations"></tbody></table></div>
-        <p class="small">Las campañas de prueba se examinaron antes. La comparación es retrospectiva. Una correlación alta, como la de arsénico y plomo, puede coexistir con errores grandes de predicción.</p>
-      </div>
     </section>
   </main>
   <footer class="wrap">Ingeniería Ambiental · Lago Chinchaycocha <a href="#inicio">Volver arriba ↑</a></footer>

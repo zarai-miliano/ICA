@@ -168,26 +168,4 @@ if (typeof document !== 'undefined') {
   byId('form').addEventListener('submit',event=>{event.preventDefault();render()});
   showExample();
 
-  function addRow(table,cells) {
-    const row=table.insertRow();
-    for (const value of cells) row.insertCell().textContent=value;
-  }
-  for (const p of data.outputs) {
-    const [dev,test]=data.scores.filter(r=>r.param===p);
-    addRow(byId('scores'),[data.names[p].label+' · '+data.names[p].unit,
-      dev.n+' / '+test.n,format(dev.mae)+' / '+format(dev.baseline),format(test.mae)+' / '+format(test.baseline)]);
-  }
-  const chooser=byId('relation');
-  for (const p of data.order) chooser.add(new Option(data.names[p].label,p));
-  chooser.value='As';
-  function relations() {
-    const table=byId('relations');
-    table.replaceChildren();
-    for (const item of data.relations.filter(r=>[r.a,r.b].includes(chooser.value))) {
-      const name=item.a===chooser.value?item.b:item.a;
-      addRow(table,[data.names[name].label,format(item.r),item.n,format(item.r_l2)]);
-    }
-  }
-  chooser.addEventListener('change',relations);
-  relations();
 }
