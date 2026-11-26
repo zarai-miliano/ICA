@@ -23,12 +23,12 @@
       <p class="eyebrow">Pronóstico de mes futuro</p>
       <h2>Diciembre de 2026</h2>
       <div class="panel">
-        <p>ICA-PE promedio de los puntos monitoreados en el lago Chinchaycocha.</p>
+        <p>Promedio referencial de ICA puntuales de los puntos monitoreados en el lago Chinchaycocha.</p>
         <div class="forecast-stats">
-          <div><strong>59,70</strong><span>ICA pronosticado · Regular</span></div>
-          <div><strong>50 %</strong><span>Confiabilidad histórica · 1 de 2 aciertos</span></div>
+          <div><strong>59,70</strong><span>Promedio puntual pronosticado · Regular</span></div>
+          <div><strong>50 %</strong><span>Acierto retrospectivo · 1 de 2 pruebas</span></div>
         </div>
-        <p>Se cuenta un acierto cuando la diferencia con el promedio de referencia es de hasta 3 puntos del ICA. El 50 % describe solo dos pruebas históricas.</p>
+        <p>Se cuenta un acierto cuando la diferencia con el promedio de referencia es de hasta 3 puntos. Dos pruebas históricas sustentan esta frecuencia. El ICA por período se obtiene reuniendo las excedencias de todos los datos y aplicando la normalización de la guía.</p>
         <details>
           <summary>Cómo se calculó y cómo validarlo</summary>
           <p>El pronóstico usa como referencia el ICA medio del último diciembre disponible, el de 2025, con 10 monitoreos. En cada prueba histórica se aplicó la misma regla usando solo el diciembre anterior disponible. El método es independiente del simulador neuronal.</p>
@@ -41,7 +41,8 @@
       </div>
     </section>
     <section id="simulador" class="wrap section">
-      <p class="eyebrow">Demostración</p><h2>Simulador del ICA-PE</h2>
+      <p class="eyebrow">Demostración</p><h2>Simulador del ICA-PE parcial</h2>
+      <p class="small">Aplicación referencial a un monitoreo con 12 parámetros. La guía recomienda 17 filas de parámetros para categoría 4. El panel del proyecto incluye cobre y cuenta con resultados incompletos para varias filas recomendadas.</p>
       <div class="switch" role="group" aria-label="Modo de predicción"><button id="full-mode" type="button" aria-pressed="false">12 parámetros</button><button id="nine-mode" type="button" aria-pressed="true">9 parámetros</button><button id="three-mode" type="button" aria-pressed="false">3 parámetros</button></div>
       <div class="demo-grid">
         <form class="panel" id="form">
@@ -53,22 +54,23 @@
         <article class="panel results" id="result" aria-live="polite"></article>
       </div>
       <section class="panel ica-guide" aria-labelledby="ica-guide-title">
-        <p class="eyebrow">Cuadro N.º 07 · CCME_WQI</p>
+        <p class="eyebrow">Cuadro N.º 05 · ICA-PE · ANA 2018</p>
         <h3 id="ica-guide-title">Interpretación de la calificación ICA</h3>
         <p id="ica-guide-status" class="sub-result" role="status"></p>
         <div class="table-scroll ica-table-wrap">
           <table class="ica-table">
             <thead><tr><th scope="col">Rango del ICA</th><th scope="col">Calificación</th><th scope="col">Interpretación</th></tr></thead>
             <tbody>
-              <tr id="ica-excelente"><td>95–100</td><th scope="row"><span class="grade">Excelente</span><div class="ica-marks"></div></th><td>La calidad del agua está protegida y las condiciones son muy cercanas a los niveles naturales o deseados.</td></tr>
-              <tr id="ica-buena"><td>80 a &lt;95</td><th scope="row"><span class="grade">Buena</span><div class="ica-marks"></div></th><td>La calidad se aleja un poco de la condición natural y puede presentar amenazas o daños de poca magnitud.</td></tr>
-              <tr id="ica-favorable"><td>65 a &lt;80</td><th scope="row"><span class="grade">Favorable</span><div class="ica-marks"></div></th><td>La calidad natural se ve amenazada ocasionalmente. Muchos usos necesitan tratamiento.</td></tr>
-              <tr id="ica-regular"><td>45 a &lt;65</td><th scope="row"><span class="grade">Regular</span><div class="ica-marks"></div></th><td>La calidad incumple los objetivos con frecuencia. Muchos usos necesitan tratamiento.</td></tr>
-              <tr id="ica-mala"><td>0 a &lt;45</td><th scope="row"><span class="grade">Mala</span><div class="ica-marks"></div></th><td>La calidad incumple los objetivos y casi siempre se ve amenazada o dañada. Todos los usos necesitan tratamiento previo.</td></tr>
+              <tr id="ica-excelente"><td>90–100</td><th scope="row"><span class="grade">Excelente</span><div class="ica-marks"></div></th><td>La calidad del agua está protegida y las condiciones son muy cercanas a los niveles naturales o deseados.</td></tr>
+              <tr id="ica-bueno"><td>75 a &lt;90</td><th scope="row"><span class="grade">Bueno</span><div class="ica-marks"></div></th><td>La calidad se aleja un poco de la condición natural y puede presentar amenazas o daños de poca magnitud.</td></tr>
+              <tr id="ica-regular"><td>45 a &lt;75</td><th scope="row"><span class="grade">Regular</span><div class="ica-marks"></div></th><td>La calidad natural se ve amenazada ocasionalmente. Muchos usos necesitan tratamiento.</td></tr>
+              <tr id="ica-malo"><td>30 a &lt;45</td><th scope="row"><span class="grade">Malo</span><div class="ica-marks"></div></th><td>La calidad incumple los objetivos con frecuencia. Muchos usos necesitan tratamiento.</td></tr>
+              <tr id="ica-pesimo"><td>0 a &lt;30</td><th scope="row"><span class="grade">Pésimo</span><div class="ica-marks"></div></th><td>La calidad incumple los objetivos y casi siempre se ve amenazada o dañada. Todos los usos necesitan tratamiento previo.</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="small ica-note">Adaptado del cuadro compartido. Los cortes de 45, 65, 80 y 95 se aplican al ICA antes de redondearlo.</p>
+        <p class="small ica-note">Fuente: guía ANA entregada, página impresa 19. Cortes de 30, 45, 75 y 90 antes de redondear.</p>
+        <details><summary>Método y alcance del cálculo</summary><p>Para un monitoreo, la página impresa 21 usa F1 = F2 = 100 × parámetros incumplidos / parámetros evaluados y F3 = 100 × S / (1 + S), con S igual a la suma de excedencias. Para un período de al menos cuatro monitoreos, las páginas impresas 17–18 normalizan S entre el total de datos y F1 cuenta parámetros con algún incumplimiento.</p><p>Las concentraciones estimadas y L/2 son supuestos del proyecto. El cálculo con las 12 mediciones es la referencia del mismo panel parcial. Los modelos predicen ese panel.</p><p><a href="metodologia_ICA_PE_2018.pdf" target="_blank" rel="noopener">Consultar el documento de metodología</a></p></details>
       </section>
     </section>
   </main>

@@ -53,10 +53,10 @@ footer{display:flex;justify-content:space-between;gap:12px;padding-block:22px;fo
 .ica-table tbody th{background:transparent;min-width:155px}
 .grade,.ica-marker{display:inline-block;border-radius:6px;padding:3px 8px;font-weight:700}
 #ica-excelente{--grade:#2456a0;--highlight:#edf4ff}
-#ica-buena{--grade:#006c91;--highlight:#e6f6fc}
-#ica-favorable{--grade:#326b30;--highlight:#edf7e9}
-#ica-regular{--grade:#805500;--highlight:#fff6d9}
-#ica-mala{--grade:#a02932;--highlight:#ffeff0}
+#ica-bueno{--grade:#006c91;--highlight:#e6f6fc}
+#ica-regular{--grade:#326b30;--highlight:#edf7e9}
+#ica-malo{--grade:#805500;--highlight:#fff6d9}
+#ica-pesimo{--grade:#a02932;--highlight:#ffeff0}
 .grade{background:var(--grade);color:white}
 .ica-selected{background:var(--highlight)}
 .ica-selected td:first-child{box-shadow:inset 4px 0 var(--grade);font-weight:750}

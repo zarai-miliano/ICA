@@ -19,6 +19,19 @@ function formula(values) {
   return {ica:100-Math.sqrt((2*f1*f1+f3*f3)/3),count,f1,f3};
 }
 
+function formulaPeriod(monitors) {
+  if (monitors.length<4 || monitors.some(row=>row.length!==12 || row.some(v=>!Number.isFinite(v)||v<0))) {
+    throw new Error('Se requieren al menos cuatro monitoreos completos de doce parámetros.');
+  }
+  const excess = monitors.map(row=>row.map((x,i)=>Math.max(0,x/maximum[i]-1,minimum[i]/Math.max(x,1e-12)-1)));
+  const failedParameters = maximum.filter((_,i)=>excess.some(row=>row[i]>0)).length;
+  const failedResults = excess.flat().filter(x=>x>0).length;
+  const total = monitors.length*12;
+  const nse = excess.flat().reduce((a,b)=>a+b,0)/total;
+  const f1 = 100*failedParameters/12, f2 = 100*failedResults/total, f3 = 100*(1-1/(1+nse));
+  return {ica:100-Math.sqrt((f1*f1+f2*f2+f3*f3)/3),f1,f2,f3,nse};
+}
+
 function predictFull(values) {
   const {layers,mean,scale} = data.complete;
   const [logit] = forward(layers,values.map((v,i)=>(v-mean[i])/scale[i]));
@@ -50,14 +63,14 @@ function predictNine(values) {
 }
 
 function classifyICA(value) {
-  if (value>=95) return {key:'excelente', label:'Excelente'};
-  if (value>=80) return {key:'buena', label:'Buena'};
-  if (value>=65) return {key:'favorable', label:'Favorable'};
+  if (value>=90) return {key:'excelente', label:'Excelente'};
+  if (value>=75) return {key:'bueno', label:'Bueno'};
   if (value>=45) return {key:'regular', label:'Regular'};
-  return {key:'mala', label:'Mala'};
+  if (value>=30) return {key:'malo', label:'Malo'};
+  return {key:'pesimo', label:'Pésimo'};
 }
 
-if (typeof module !== 'undefined') module.exports = {predictFull,predictThree,predictNine,formula,classifyICA};
+if (typeof module !== 'undefined') module.exports = {predictFull,predictThree,predictNine,formula,formulaPeriod,classifyICA};
 
 if (typeof document !== 'undefined') {
   const byId = id=>document.getElementById(id);
