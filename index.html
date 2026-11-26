@@ -6,38 +6,17 @@
   <meta name="description" content="Demostración del modelo ICA-PE entrenado con los monitoreos del lago Chinchaycocha.">
   <title>Índice de calidad de Agua</title>
   <link rel="stylesheet" href="estilos.css">
-  <link rel="stylesheet" href="pronostico.css">
+  <link rel="stylesheet" href="portada.css">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
-  <header class="top"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span> Chinchaycocha</a><nav aria-label="Secciones"><a href="#simulador">Simulador</a><a href="#pronostico">Pronóstico</a></nav></header>
+  <header class="top"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span> Chinchaycocha</a><nav aria-label="Secciones"><a href="#simulador">Simulador</a></nav></header>
   <main id="inicio">
     <section class="hero">
       <div class="wrap hero-grid">
         <div><p class="eyebrow">Lago Chinchaycocha · Junín</p><h1>Índice de calidad de Agua</h1><p class="intro">Explora cómo una red neuronal estima el ICA-PE y qué cambia cuando se miden solo tres parámetros.</p><a class="hero-button" href="#simulador">Probar el modelo <span aria-hidden="true">↘</span></a></div>
-      </div>
-    </section>
-    <section id="pronostico" class="wrap section">
-      <p class="eyebrow">Pronóstico de mes futuro</p>
-      <h2>Diciembre de 2026</h2>
-      <div class="panel">
-        <p>Promedio referencial de ICA puntuales de los puntos monitoreados en el lago Chinchaycocha.</p>
-        <div class="forecast-stats">
-          <div><strong>59,70</strong><span>Promedio puntual pronosticado · Regular</span></div>
-          <div><strong>50 %</strong><span>Acierto retrospectivo · 1 de 2 pruebas</span></div>
-        </div>
-        <p>Se cuenta un acierto cuando la diferencia con el promedio de referencia es de hasta 3 puntos. Dos pruebas históricas sustentan esta frecuencia. El ICA por período se obtiene reuniendo las excedencias de todos los datos y aplicando la normalización de la guía.</p>
-        <details>
-          <summary>Cómo se calculó y cómo validarlo</summary>
-          <p>El pronóstico usa como referencia el ICA medio del último diciembre disponible, el de 2025, con 10 monitoreos. En cada prueba histórica se aplicó la misma regla usando solo el diciembre anterior disponible. El método es independiente del simulador neuronal.</p>
-          <ul>
-            <li>Diciembre de 2024 (9 monitoreos). Pronóstico 66,11 a partir de 2019 y referencia 60,60. Error de 5,51 puntos.</li>
-            <li>Diciembre de 2025 (10 monitoreos). Pronóstico 60,60 a partir de 2024 y referencia 59,70. Error de 0,90 puntos.</li>
-          </ul>
-          <p>Para validarlo, calcula el ICA de cada monitoreo de diciembre de 2026 con los doce resultados de laboratorio, promedia los mismos diez puntos y compara el promedio con 59,70.</p>
-        </details>
       </div>
     </section>
     <section id="simulador" class="wrap section">
