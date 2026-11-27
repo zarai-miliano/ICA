@@ -12,7 +12,7 @@
 .story-route a { display: block; padding: 7px 11px; border: 1px solid #91b7a655; border-radius: 20px; font-size: 11px; color: #335c52; background: #f8fbf4cc; text-decoration: none; transition: color .3s,background .3s; }
 .story-route a[aria-current=step] { background: #264f49; color: #e7eee0; border-color: #264f49; }
 .story-world { position: absolute; inset: 0; perspective: 1000px; overflow: hidden; }
-.story-landscape { position: absolute; inset: 0; background: linear-gradient(0deg,#183f4ce0,#183f4c16 60%),url('assets/chinchaycocha-poster.jpg') center / cover; opacity: .85; transition: opacity 1s; }
+.story-landscape { position: absolute; inset: 0; background: linear-gradient(0deg,#183f4ce0,#183f4c16 60%),url('assets/monitoreo-chinchaycocha.webp') center / cover; opacity: .85; transition: opacity 1s; }
 .world-glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%,#fcfff900,transparent 80%); transition: background 1s; }
 .sample-water { position: absolute; width: 430px; height: 230px; left: 50%; bottom: 50px; transform: translateX(-50%) rotateX(65deg); border-radius: 50%; background: radial-gradient(ellipse,#67999b44,#9ad2c516,transparent 70%); transition: opacity 1s,transform 1s; }
 .sample-water i { position: absolute; inset: 15%; border: 1px solid #d0f1e477; border-radius: 50%; animation: sample-ripple 4s ease-out infinite; }

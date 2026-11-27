@@ -6,20 +6,19 @@
   <meta name="description" content="Simulador del ICA-PE parcial del lago Chinchaycocha: mediciones de calidad del agua, modelos predictivos e interpretación de resultados.">
   <meta name="theme-color" content="#123b42">
   <title>Índice de calidad de Agua · Chinchaycocha</title>
-  <link rel="preload" as="image" href="assets/chinchaycocha-poster.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/monitoreo-chinchaycocha.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css?v=water-motion-1">
   <link rel="stylesheet" href="territorio.css?v=2">
-  <link rel="stylesheet" href="historia.css?v=1">
+  <link rel="stylesheet" href="historia.css?v=2">
+  <link rel="stylesheet" href="relato.css?v=1">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
   <script defer src="app.js?v=water-motion-1"></script>
-  <script defer src="escena-3d.js?v=water-motion-1"></script>
-  <script defer src="movimiento.js?v=1"></script>
-  <script defer src="territorio.js?v=2"></script>
-  <script defer src="historia.js?v=1"></script>
+  <script defer src="territorio.js?v=3"></script>
+  <script defer src="historia.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#simulador">Ir al simulador</a>
@@ -30,6 +29,7 @@
         <span>Chinchaycocha<small>CALIDAD DEL AGUA</small></span>
       </a>
       <nav aria-label="Secciones">
+        <a class="nav-story" href="#historia">El recorrido</a>
         <a class="nav-lake" href="#el-lago">El lago</a>
         <a href="#simulador">Simulador</a>
         <a href="#interpretacion">Interpretación</a>
@@ -38,45 +38,12 @@
     </div>
   </header>
   <main id="inicio">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="panoramic-landscape" aria-hidden="true"><img class="landscape-day" src="assets/chinchaycocha-poster.jpg" width="752" height="424" alt="" fetchpriority="high"><video class="landscape-video" id="lake-video" muted loop playsinline preload="none" poster="assets/chinchaycocha-poster.jpg"><source src="assets/chinchaycocha-fondo.mp4" type="video/mp4"></video><img class="landscape-evening" src="assets/atardecer-junin.jpg" width="3000" height="2000" alt=""></div>
-      <canvas class="water-atmosphere" id="water-atmosphere" aria-hidden="true"></canvas>
-      <div class="sky-birds" aria-hidden="true"><svg viewBox="0 0 160 60"><path d="M5 30q13-15 26 0 13-15 26 0M70 15q9-11 18 0 9-11 18 0M110 43q10-12 20 0 10-12 20 0"/></svg></div>
-      <div class="floating-water" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-      <div class="wrap hero-grid">
-        <div class="hero-content">
-          <p class="eyebrow"><span class="hero-rule" aria-hidden="true"></span>Entre el agua y los Andes</p>
-          <h1 id="hero-title"><span class="title-line">Índice de calidad</span><span class="title-line">de <em>Agua</em></span></h1>
-          <p class="intro">Conocer el agua de Chinchaycocha es una forma de cuidar la vida que depende de ella.</p>
-          <a class="hero-button" href="#historia">Del lago al dato <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a><a class="hero-direct" href="#simulador">Ir al simulador</a>
-          <div class="hero-footnote"><span>ICA-PE parcial</span><span>ECA · Categoría 4 / E1</span></div>
-          <div class="landscape-switch" role="group" aria-label="Fotografía de la portada"><button type="button" data-light="day" aria-pressed="true"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3"/><path d="M10 1v2m0 14v2M1 10h2m14 0h2M4 4l1 1m10 10 1 1M4 16l1-1M15 5l1-1"/></svg>De día</button><button type="button" data-light="evening" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 14h16M4 11a6 6 0 0 1 12 0M10 1v2M2 4l2 2m14-2-2 2M3 17h14"/></svg>Atardecer</button></div>
-        </div>
-        <figure class="lake-visual">
-          <img class="lake-image" src="chinchaycocha.jpg" alt="Vista panorámica del lago Chinchaycocha y sus humedales, con montañas al fondo." width="1280" height="418" fetchpriority="high">
-          <div class="photo-shade" aria-hidden="true"></div>
-          <div class="water-scene" aria-hidden="true">
-            <svg class="water-fallback" viewBox="0 0 300 380"><defs><radialGradient id="water-glass" cx="28%" cy="25%" r="85%"><stop stop-color="#efffff" stop-opacity=".85"/><stop offset=".35" stop-color="#8abac4" stop-opacity=".18"/><stop offset=".8" stop-color="#347183" stop-opacity=".3"/><stop offset="1" stop-color="#e7f9fa" stop-opacity=".8"/></radialGradient></defs><path d="M150 20C138 76 42 166 42 245a108 108 0 0 0 216 0C258 166 162 76 150 20Z" fill="url(#water-glass)" stroke="#d1edf0" stroke-opacity=".7"/><path d="M118 112c-34 52-54 98-45 136" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="5" stroke-linecap="round"/></svg>
-            <canvas id="water-canvas"></canvas>
-          </div>
-          <span class="photo-label" aria-hidden="true">Reflejos del lago.</span>
-          <figcaption>
-            <div><strong>Lago Chinchaycocha</strong><span>Junín y Pasco · Perú</span></div>
-            <button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false" aria-controls="water-canvas lake-video"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Pausar movimiento</span></button>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="lake-signature wrap"><div><span>Reserva Nacional de Junín</span><strong>Chinchaycocha</strong></div><a href="#el-lago">Descubre el ecosistema <span class="scroll-capsule" aria-hidden="true"><i></i></span></a></div>
-      <div class="shore-reeds" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <svg class="hero-waves" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><defs><path id="shore-wave" d="M0 70Q180 10 360 70T720 70T1080 70T1440 70T1800 70T2160 70T2520 70T2880 70V180H0Z"/></defs><g transform="translate(0,-8)" fill="#71a7a2" opacity=".18"><use class="wave-layer wave-back" href="#shore-wave"/></g><g transform="translate(0,13)" fill="#b2d3c1" opacity=".26"><use class="wave-layer wave-middle" href="#shore-wave"/></g><g transform="translate(0,33)" fill="#f7f8f5"><use class="wave-layer wave-near" href="#shore-wave"/></g></svg>
-    </section>
     <section class="research-story" id="historia" aria-labelledby="research-title">
-      <div class="wrap research-intro"><p class="eyebrow">Una historia del agua</p><h2 id="research-title">Del lago al dato.<br><em>Del dato a una estimación.</em></h2><p>Desliza para seguir el recorrido de una muestra: del trabajo en campo a una herramienta que aprende de los registros históricos.</p></div>
       <div class="wrap story-layout">
         <div class="story-visual" data-stage="0">
           <nav class="story-route" aria-label="Etapas del recorrido"><a href="#story-campo" aria-current="step">Campo</a><a href="#story-laboratorio">Laboratorio</a><a href="#story-modelo">Modelo</a><a href="#story-ica">ICA</a></nav>
           <div class="story-world" aria-hidden="true">
-            <div class="story-landscape"></div><div class="world-glow"></div>
+            <div class="story-landscape"></div><div class="story-lab-landscape"></div><div class="world-glow"></div><div class="scene-ground"></div>
             <div class="sample-water"><i></i><i></i><i></i></div>
             <div class="sample-bottle"><div class="bottle-cap"></div><div class="bottle-neck"></div><div class="bottle-body"><div class="bottle-liquid"></div><div class="bottle-shine"></div><div class="bottle-label"><span>CHINCHAYCOCHA</span><strong>Muestra<br>de agua</strong><small>Registro de campo</small></div></div></div>
             <div class="lab-platform"><div class="lab-tube"><i></i></div><div class="lab-tube"><i></i></div><div class="lab-tube"><i></i></div><span>Resultados del laboratorio</span></div>
@@ -84,13 +51,13 @@
             <div class="story-laptop"><div class="laptop-lid"><div class="laptop-camera"></div><div class="laptop-screen"><div class="screen-top"><span>Chinchaycocha</span><small>ICA-PE</small></div><div class="screen-content"><span class="screen-kicker">EJEMPLO HISTÓRICO</span><strong class="screen-title">Del registro a la estimación</strong><div class="screen-fields"><span>OD <b>6.75</b></span><span>pH <b>8.69</b></span><span>P total <b>0.005</b></span><span>N total <b>1.42</b></span><span>Hg <b>0.000045</b></span><span>Pb <b>0.0003</b></span><span>Zn <b>0.0055</b></span><span>Cu <b>0.00087</b></span><span>SST <b>1</b></span></div><div class="screen-inference"><span>Concentraciones estimadas</span><div><span>DBO₅ <b>1.2821</b></span><span>As <b>0.0031945</b></span><span>Coliformes <b>2.3483</b></span></div></div><div class="screen-result"><span>ICA con estimaciones</span><strong>54.56 <small>Regular</small></strong></div></div><div class="screen-bottom">9 medidos + 3 estimados · ejemplo referencial</div></div></div><div class="laptop-base"><div class="laptop-keyboard"></div><div class="laptop-trackpad"></div></div><div class="laptop-edge"></div></div>
             <div class="story-result-orbit"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="51"/><circle class="story-score-arc" cx="60" cy="60" r="51"/></svg><span>ICA-PE<strong>54.56</strong><small>Regular</small></span></div>
           </div>
-          <div class="story-caption"><span id="story-scene-label">La muestra comienza en el lago</span><span>Recorrido ilustrativo</span></div><div class="story-progress" aria-hidden="true"><i></i></div>
+          <div class="story-caption"><span id="story-scene-label">La muestra comienza en el lago</span><span>Escenas recreadas · ejemplo histórico</span><button class="story-motion" type="button" aria-pressed="false">Pausar transiciones</button></div><div class="story-progress" aria-hidden="true"><i></i></div>
         </div>
         <div class="story-chapters">
-          <article class="story-chapter" id="story-campo" data-chapter="0"><p class="chapter-label">En el lago</p><h3>Todo comienza<br>con una muestra.</h3><p>El recorrido parte del monitoreo: se identifica el punto y la fecha, se toman mediciones de campo y se recolecta agua para el análisis.</p><span class="chapter-detail">Punto + fecha + muestra</span></article>
-          <article class="story-chapter" id="story-laboratorio" data-chapter="1"><p class="chapter-label">En el laboratorio</p><h3>El agua se convierte<br>en información.</h3><p>Los análisis aportan concentraciones de nutrientes, metales y otros parámetros. Esos resultados se ordenan con las mediciones de campo para construir el registro histórico.</p><span class="chapter-detail">Mediciones + resultados de laboratorio</span></article>
-          <article class="story-chapter" id="story-modelo" data-chapter="2"><p class="chapter-label">En la laptop</p><h3>Medimos una parte.<br>Estimamos el resto.</h3><p>El simulador recibe las mediciones disponibles y usa relaciones aprendidas del histórico para estimar los parámetros faltantes. En el modo de nueve entradas, Ridge estima DBO₅, arsénico y coliformes; el modo de tres entradas utiliza una ANN.</p><span class="chapter-detail">Medidos y estimados, siempre diferenciados</span></article>
-          <article class="story-chapter" id="story-ica" data-chapter="3"><p class="chapter-label">En el simulador</p><h3>El panel se completa.<br>El ICA toma forma.</h3><p>Con los nueve parámetros medidos y los tres estimados se calcula el ICA-PE del panel parcial. El ejemplo histórico da <strong>54.56, categoría Regular.</strong> Una estimación conserva incertidumbre y necesita contrastarse con nuevas mediciones.</p><a class="story-cta" href="#simulador">Probar con mis mediciones</a><span class="chapter-detail">La animación ilustra el ejemplo; no es un monitoreo en vivo.</span></article>
+          <article class="story-chapter" id="story-campo" data-chapter="0"><p class="chapter-label">Chinchaycocha · Perú</p><h1 id="research-title">Índice de calidad<br>de <em>Agua</em></h1><p class="story-opening">Todo comienza en el lago.</p><p>Una muestra, un punto y una fecha. El monitoreo reúne las primeras mediciones para conocer el agua de Chinchaycocha.</p><a class="chapter-scroll" href="#story-laboratorio">Desliza para seguir la muestra <span aria-hidden="true">↓</span></a><span class="chapter-detail">Campo: identificar, medir y recolectar.</span></article>
+          <article class="story-chapter" id="story-laboratorio" data-chapter="1"><p class="chapter-label">La muestra llega al laboratorio</p><h2>Lo que no vemos,<br>se analiza.</h2><p>El laboratorio determina nutrientes, metales y otros parámetros. Cada resultado se une al punto y la fecha del monitoreo, formando un registro histórico.</p><span class="chapter-detail">Del frasco a los resultados de análisis.</span></article>
+          <article class="story-chapter" id="story-modelo" data-chapter="2"><p class="chapter-label">Del histórico a la página</p><h2>Ingresas lo medido.<br>El modelo estima.</h2><p>En esta página ingresas las mediciones disponibles. El modelo usa relaciones aprendidas del histórico para completar el panel. El modo de nueve entradas usa Ridge; el de tres usa una red neuronal.</p><span class="chapter-detail">Las concentraciones estimadas se distinguen de las medidas.</span></article>
+          <article class="story-chapter" id="story-ica" data-chapter="3"><p class="chapter-label">Una lectura de la calidad del agua</p><h2>Los datos se unen.<br>El ICA toma forma.</h2><p>Con el panel completado se calcula el ICA-PE parcial. Este ejemplo histórico da <strong>54.56: Regular.</strong> Es una estimación que debe contrastarse con nuevas mediciones.</p><a class="story-cta" href="#simulador">Ahora prueba el simulador</a><span class="chapter-detail">Panel de 12 parámetros · resultados referenciales.</span></article>
         </div>
       </div>
     </section>
@@ -156,7 +123,7 @@
         </div>
       </div>
       <div class="lake-facts"><div><span>Territorio</span><strong>Junín <em>y</em> Pasco</strong></div><div><span>Altitud de la reserva</span><strong>≈ 4 100 <small>m s. n. m.</small></strong></div><div><span>Reserva Nacional de Junín</span><strong>53 000 <small>hectáreas</small></strong></div><div><span>Sitio Ramsar desde</span><strong>1997</strong></div></div>
-      <details class="landscape-credits"><summary>Fuentes del territorio y créditos de las imágenes</summary><p>Información de la reserva: <a href="https://app4.ign.gob.pe/capitulos/cuatro/conservacion.php" target="_blank" rel="noopener">Atlas del IGN</a>. Paisaje: SERNANP. Endemismo: MINCETUR. Designación Ramsar: MINAM (enlaces en cada escena). Las cifras corresponden a la reserva y no a la superficie del espejo de agua.</p><p><a href="https://commons.wikimedia.org/wiki/File:Atardecer_en_el_lago_Jun%C3%ADn.jpg" target="_blank" rel="noopener">Atardecer: Jonathan Chancasana</a> · <a href="https://commons.wikimedia.org/wiki/File:Junin_Grebe_(Podiceps_taczanowskii),_Jun%C3%ADn,_Peru_1.jpg" target="_blank" rel="noopener">Zambullidor: thibaudaronson</a> · <a href="https://commons.wikimedia.org/wiki/File:Lago_de_Junin-Juni_Peru.jpg" target="_blank" rel="noopener">Lago: Bernd Wolniczak</a>. Fotografías bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, mostradas con recorte visual. Video de portada y fotografía original proporcionados por la autora del proyecto.</p></details>
+      <details class="landscape-credits"><summary>Fuentes del territorio y créditos de las imágenes</summary><p>Información de la reserva: <a href="https://app4.ign.gob.pe/capitulos/cuatro/conservacion.php" target="_blank" rel="noopener">Atlas del IGN</a>. Paisaje: SERNANP. Endemismo: MINCETUR. Designación Ramsar: MINAM (enlaces en cada escena). Las cifras corresponden a la reserva y no a la superficie del espejo de agua.</p><p><a href="https://commons.wikimedia.org/wiki/File:Atardecer_en_el_lago_Jun%C3%ADn.jpg" target="_blank" rel="noopener">Atardecer: Jonathan Chancasana</a> · <a href="https://commons.wikimedia.org/wiki/File:Junin_Grebe_(Podiceps_taczanowskii),_Jun%C3%ADn,_Peru_1.jpg" target="_blank" rel="noopener">Zambullidor: thibaudaronson</a> · <a href="https://commons.wikimedia.org/wiki/File:Lago_de_Junin-Juni_Peru.jpg" target="_blank" rel="noopener">Lago: Bernd Wolniczak</a>. Fotografías bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, mostradas con recorte visual. Las escenas de monitoreo y laboratorio de la apertura son recreaciones visuales generadas para explicar el proceso, no fotografías de un monitoreo real.</p></details>
       <div class="science-bridge"><svg aria-hidden="true" viewBox="0 0 100 40"><path d="M0 20q12-17 25 0t25 0t25 0t25 0"/></svg><p>Del paisaje a sus mediciones.<br><strong>Explora la calidad del agua con el ICA-PE.</strong></p><a href="#simulador">Usar el simulador</a></div>
     </section>
   </main>
