@@ -275,3 +275,66 @@ nav a:hover { color: white; }
 @media(max-width:760px) { .hero-grid { grid-template-columns: 1fr; padding-block: 46px 40px; gap: 37px; }.hero h1 { font-size: clamp(74px,12vw,94px); }.hero .intro { max-width: 440px; font-size: 16px; }.lake-visual { height: 410px; border-top-right-radius: 75px; transform: none; }.water-scene { height: 370px; width: 78%; bottom: 15px; }.hero-footnote { margin-top: 27px; font-size: 11px; }.photo-label { top: 28px; right: 30px; }.section-heading h2 { font-size: 35px; }.mode-count { font-size: 38px; }.switch button { padding-block: 16px; }.parameter-map { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }.parameter-panel summary { padding: 16px 18px; gap: 10px; }.parameter-legend { padding-inline: 18px; }.parameter-map { padding-inline: 18px; }.parameter-hint { margin-inline: 18px; }.parameter-chip { min-height: 90px; }.ica-guide { padding: 23px; }.guide-heading h2 { font-size: 29px; } }
 @media(max-width:420px) { .hero-grid { padding-block: 38px 30px; }.hero h1 { font-size: 76px; }.hero-footnote { font-size: 10px; }.lake-visual { height: 350px; }.water-scene { height: 305px; bottom: 18px; width: 94%; right: -20px; }.lake-visual figcaption { padding: 16px; }.photo-label { font-size: 24px; top: 24px; }.section-heading h2 { font-size: 31px; }.switch { gap: 3px; padding: 4px; }.switch button { padding-inline: 8px; }.mode-count { font-size: 36px; }.parameter-panel summary { grid-template-columns: 1fr 20px; gap: 4px; font-size: 13px; }#panel-composition { grid-column: 1; grid-row: 2; font-size: 11px; }.parameter-panel summary:after { grid-column: 2; grid-row: 1 / 3; }.parameter-map { gap: 6px; padding-inline: 13px; }.parameter-chip { padding: 9px 7px; min-height: 91px; }.parameter-chip strong { font-size: 20px; }.parameter-chip>span { font-size: 10px; overflow-wrap: anywhere; }.parameter-legend { padding-inline: 13px; gap: 13px; font-size: 11px; }.parameter-hint { margin-inline: 13px; font-size: 11px; }.panel-top h3 { font-size: 20px; }.guide-heading h2 { font-size: 27px; }.ica-guide { padding: 20px; } }
 @media(max-width:360px) { .hero h1 { font-size: 67px; }.hero-footnote { flex-wrap: wrap; }.parameter-map { grid-template-columns: repeat(3,minmax(0,1fr)); }.parameter-chip { min-height: 83px; } }
+/* Motion language: water currents, suspended glass and a moving shore. */
+.hero-grid { padding-bottom: 116px; }
+.title-line { display: block; animation: title-unfold .85s cubic-bezier(.2,.7,.2,1) both; }
+.title-line:nth-child(2) { animation-delay: .13s; }
+.hero .intro { animation: title-unfold .85s .24s both; }
+.hero-button { animation: title-unfold .85s .34s both; }
+.hero h1 em { position: relative; display: inline-block; }
+.hero h1 em:after { content: ''; position: absolute; left: 0; right: -7%; bottom: -5px; height: 12px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='12' viewBox='0 0 120 12'%3E%3Cpath d='M0 6Q15 0 30 6T60 6T90 6T120 6' fill='none' stroke='%23c6e3b8' stroke-width='1.2'/%3E%3C/svg%3E") repeat-x center; opacity: .55; animation: water-signature 8s linear infinite; }
+.water-atmosphere { position: absolute; inset: 0; display: block; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.floating-water { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.floating-water span { position: absolute; display: block; width: 18px; height: 24px; border-radius: 55% 45% 51% 49% / 65% 65% 35% 35%; background: radial-gradient(ellipse at 28% 25%,#e1fff166,#9ac9bd16 40%,#94cbb730 75%); border: 1px solid #b4d7c92b; box-shadow: inset -2px -3px 4px #ddffef0d,0 5px 12px #06272d30; animation: suspended-water 9s ease-in-out infinite; }
+.floating-water span:nth-child(1) { left: 43%; top: 18%; width: 14px; height: 19px; }
+.floating-water span:nth-child(2) { left: 49%; top: 65%; animation-delay: -3s; }
+.floating-water span:nth-child(3) { left: 8%; top: 84%; width: 10px; height: 14px; animation-delay: -6s; }
+.floating-water span:nth-child(4) { right: 3%; top: 15%; width: 26px; height: 33px; animation-delay: -2s; }
+.hero-waves { position: absolute; display: block; bottom: -1px; left: 0; width: 100%; height: 105px; stroke: none; z-index: 3; pointer-events: none; }
+.wave-layer { will-change: transform; }
+.wave-back { animation: flowing-shore 22s linear infinite; }
+.wave-middle { animation: flowing-shore 17s linear infinite reverse; }
+.wave-near { animation: flowing-shore 27s linear infinite; }
+.lake-visual { animation: photo-fade 1.1s .1s ease-out both; }
+.lake-image { animation: lake-light 14s ease-in-out infinite alternate; transform: none; }
+.lake-visual:after { content: ''; position: absolute; inset: -60%; background: linear-gradient(110deg,transparent 42%,#e5fff318 49%,transparent 56%); transform: translateX(-35%); pointer-events: none; z-index: 2; animation: passing-reflection 12s ease-in-out infinite; }
+.gauge-pointer { transform-origin: 150px 145px; animation: needle-settle .8s cubic-bezier(.22,.75,.25,1) both; }
+.parameter-chip { animation: parameter-arrives .38s ease-out backwards; animation-delay: calc(var(--chip-order,0) * 22ms); }
+.parameter-chip:hover { transform: translateY(-2px); box-shadow: 0 5px 12px #2853410d; }
+.parameter-chip:active { transform: translateY(0); }
+.section-arrives { animation: section-arrives .65s cubic-bezier(.2,.7,.2,1) both; }
+.hero-button svg { transition: transform .3s; }
+.hero-button:hover svg { transform: rotate(-12deg) scale(1.1); }
+@keyframes title-unfold { from { opacity: 0; transform: translateY(27px); filter: blur(4px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes photograph-arrives { from { opacity: 0; transform: translateY(24px) rotate(3deg) scale(.98); } to { opacity: 1; transform: translateY(0) rotate(1deg) scale(1); } }
+@keyframes flowing-shore { from { transform: translateX(-720px); } to { transform: translateX(0); } }
+@keyframes suspended-water { 0%,100% { transform: translate3d(0,0,0) rotate(-7deg); } 50% { transform: translate3d(8px,-23px,0) rotate(8deg); } }
+@keyframes water-signature { to { background-position: 120px center; } }
+@keyframes slow-water-view { from { transform: scale(1.01) translateX(0); } to { transform: scale(1.07) translateX(-1%); } }
+@keyframes passing-reflection { 0%,25% { transform: translateX(-38%); opacity: 0; } 38% { opacity: 1; } 65%,100% { transform: translateX(38%); opacity: 0; } }
+@keyframes needle-settle { from { transform: rotate(var(--needle-start)); } to { transform: rotate(0); } }
+@keyframes parameter-arrives { from { opacity: .3; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes section-arrives { from { opacity: .25; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+:is([data-motion=paused],.hero-out-of-view,.page-hidden) .hero :is(.wave-layer,.lake-image,.floating-water span),
+:is([data-motion=paused],.hero-out-of-view,.page-hidden) .lake-visual:after,
+:is([data-motion=paused],.hero-out-of-view,.page-hidden) .hero h1 em:after { animation-play-state: paused!important; }
+[data-motion=paused] .hero .water-scene { transform: none; }
+@media(max-width:760px) { .hero-grid { padding-bottom: 90px; }.hero-waves { height: 76px; }.lake-visual { animation-name: photo-fade; }.floating-water span:nth-child(2) { left: 87%; top: 34%; } }
+@keyframes photograph-arrives-mobile { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width:420px) { .hero-grid { padding-bottom: 74px; }.hero-waves { height: 61px; }.floating-water span:nth-child(4) { display: none; } }
+@media(prefers-reduced-motion:reduce) { .hero *, .hero *:after, .gauge-pointer, .parameter-chip, .section-arrives { animation: none!important; }.hero h1 em:after { animation: none; }.wave-layer { will-change: auto; } }
+@keyframes photo-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lake-light { from { filter: saturate(.82) brightness(.99); } to { filter: saturate(.96) brightness(1.04); } }
+@media(max-width:760px) { .floating-water span:nth-child(1) { left: 82%; top: 17%; width: 27px; height: 35px; }.floating-water span:nth-child(2) { left: 84%; top: 38%; width: 22px; height: 29px; } }
+/* Keep photographic layers in the same grid cell while they animate. */
+.lake-visual { display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,1fr); }
+.lake-image { position: relative; inset: auto; grid-area: 1 / 1; align-self: stretch; justify-self: stretch; min-width: 0; min-height: 0; width: 100%; height: 100%; }
+.photo-shade { position: relative; inset: auto; grid-area: 1 / 1; width: 100%; height: 100%; pointer-events: none; }
+.water-scene { position: relative; inset: auto; grid-area: 1 / 1; justify-self: end; align-self: center; margin-top: -10px; width: 90%; height: 85%; }
+.photo-label { position: relative; inset: auto; grid-area: 1 / 1; justify-self: end; align-self: start; margin: 30px; }
+.lake-visual figcaption { position: relative; inset: auto; grid-area: 1 / 1; width: 100%; align-self: end; }
+.hero { display: grid; }
+.hero-grid,.hero-waves { grid-area: 1 / 1; }
+.hero-waves { position: relative; inset: auto; align-self: end; margin-bottom: -1px; }
+@media(max-width:760px) { .water-scene { width: 84%; height: 88%; }.photo-label { margin: 25px; } }
+@media(max-width:420px) { .water-scene { width: 95%; }.photo-label { margin: 22px; } }

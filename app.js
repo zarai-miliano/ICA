@@ -87,7 +87,7 @@ if (typeof document !== 'undefined') {
       return `<path d="M${a.join(' ')} A125 125 0 0 1 ${b.join(' ')}" stroke="${color}" stroke-width="8" fill="none" stroke-linecap="round"/>`;
     }).join('');
     const dot=point(Math.max(0,Math.min(100,value)));
-    return `<div class="gauge"><svg viewBox="0 0 300 165" aria-hidden="true">${arcs}<circle cx="${dot[0]}" cy="${dot[1]}" r="8" fill="var(--deep)" stroke="white" stroke-width="3"/></svg><div class="gauge-values"><strong class="index-value">${scoreFormat.format(value)}</strong><div class="score-total">de 100 puntos</div></div><div class="gauge-labels" aria-hidden="true"><span>0</span><span>100</span></div></div>`;
+    return `<div class="gauge"><svg viewBox="0 0 300 165" aria-hidden="true">${arcs}<g class="gauge-pointer" style="--needle-start:${-Math.max(0,Math.min(100,value))*1.8}deg"><circle cx="${dot[0]}" cy="${dot[1]}" r="8" fill="var(--deep)" stroke="white" stroke-width="3"/></g></svg><div class="gauge-values"><strong class="index-value">${scoreFormat.format(value)}</strong><div class="score-total">de 100 puntos</div></div><div class="gauge-labels" aria-hidden="true"><span>0</span><span>100</span></div></div>`;
   }
   const classificationRows = [...document.querySelectorAll('.ica-table tbody tr')];
   function markClassification(results = []) {
@@ -118,11 +118,12 @@ if (typeof document !== 'undefined') {
     const measured = active();
     byId('panel-composition').textContent = measured.length+' medidos'+(measured.length<12?' · '+(12-measured.length)+' estimados':' · panel completo');
     byId('parameter-hint').textContent='Selecciona un parámetro para ver su origen o ir a su campo.';
-    byId('parameter-map').replaceChildren(...data.order.map(p=>{
+    byId('parameter-map').replaceChildren(...data.order.map((p,index)=>{
       const isMeasured=measured.includes(p);
       const button=document.createElement('button');
       button.type='button';
       button.className='parameter-chip '+(isMeasured?'is-measured':'is-estimated');
+      button.style.setProperty('--chip-order',index);
       button.setAttribute('aria-label',data.names[p].label+': '+(isMeasured?'medición de entrada, ir al campo':'valor estimado'));
       const symbol=document.createElement('strong'),label=document.createElement('span');
       symbol.textContent=symbols[p];label.textContent=data.names[p].label;

@@ -53,15 +53,15 @@
     varying vec3 vPosition;
     varying vec3 vNormal;
     void main() {
-      float ax = -.10 + uPointer.y * .20;
+      float ax = -.10 + .12 * sin(uTime * .55) + uPointer.y * .20;
       float ay = .40 + uTime * .10 + uPointer.x * .35;
-      float az = .08 * sin(uTime * .4);
+      float az = .14 * sin(uTime * .5);
       mat3 rx = mat3(1.,0.,0., 0.,cos(ax),sin(ax), 0.,-sin(ax),cos(ax));
       mat3 ry = mat3(cos(ay),0.,-sin(ay), 0.,1.,0., sin(ay),0.,cos(ay));
       mat3 rz = mat3(cos(az),sin(az),0., -sin(az),cos(az),0., 0.,0.,1.);
       mat3 rotation = rz * ry * rx;
       vec3 p = rotation * aPosition;
-      p.y += .05 * sin(uTime * .7);
+      p.y += .12 * sin(uTime * .85);
       vPosition = p;
       vNormal = rotation * aNormal;
       float z = p.z - 5.6;

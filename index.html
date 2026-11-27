@@ -10,11 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="estilos.css?v=lake-studio-1">
+  <link rel="stylesheet" href="estilos.css?v=water-motion-1">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
-  <script defer src="app.js?v=lake-studio-1"></script>
-  <script defer src="escena-3d.js?v=editorial-1"></script>
+  <script defer src="app.js?v=water-motion-1"></script>
+  <script defer src="escena-3d.js?v=water-motion-1"></script>
+  <script defer src="movimiento.js?v=1"></script>
 </head>
 <body>
   <a class="skip-link" href="#simulador">Ir al simulador</a>
@@ -33,10 +34,12 @@
   </header>
   <main id="inicio">
     <section class="hero" aria-labelledby="hero-title">
+      <canvas class="water-atmosphere" id="water-atmosphere" aria-hidden="true"></canvas>
+      <div class="floating-water" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
       <div class="wrap hero-grid">
         <div class="hero-content">
           <p class="eyebrow"><span class="hero-rule" aria-hidden="true"></span>Lago Chinchaycocha · Perú</p>
-          <h1 id="hero-title">Índice de calidad<br>de <em>Agua</em></h1>
+          <h1 id="hero-title"><span class="title-line">Índice de calidad</span><span class="title-line">de <em>Agua</em></span></h1>
           <p class="intro">Una herramienta para estudiar la calidad del agua del lago, a partir de mediciones y modelos predictivos.</p>
           <a class="hero-button" href="#simulador">Abrir simulador <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a>
           <div class="hero-footnote"><span>ICA-PE parcial</span><span>ECA · Categoría 4 / E1</span></div>
@@ -55,6 +58,7 @@
           </figcaption>
         </figure>
       </div>
+      <svg class="hero-waves" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><defs><path id="shore-wave" d="M0 70Q180 10 360 70T720 70T1080 70T1440 70T1800 70T2160 70T2520 70T2880 70V180H0Z"/></defs><g transform="translate(0,-8)" fill="#71a7a2" opacity=".18"><use class="wave-layer wave-back" href="#shore-wave"/></g><g transform="translate(0,13)" fill="#b2d3c1" opacity=".26"><use class="wave-layer wave-middle" href="#shore-wave"/></g><g transform="translate(0,33)" fill="#f7f8f5"><use class="wave-layer wave-near" href="#shore-wave"/></g></svg>
     </section>
     <section id="simulador" class="wrap section" aria-labelledby="simulator-title">
       <div class="section-heading">

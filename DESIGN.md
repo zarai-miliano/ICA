@@ -27,3 +27,7 @@ Se retiraron los anillos, retículas, brillos de neón, mensajes promocionales y
 ## Mapa interactivo del panel
 
 La portada combina una superficie de color profundo con la fotografía y el material refractivo. El selector incorpora un mapa de los doce parámetros: cada modo diferencia las mediciones de entrada de los valores que estima el modelo. Las fichas de mediciones llevan el foco al campo correspondiente; las fichas estimadas explican su origen. El panel se puede plegar mediante un control nativo `details` y es accesible con teclado. La visualización representa la configuración del modelo y no añade observaciones ni modifica sus cálculos.
+
+## Movimiento del agua
+
+La portada añade tres capas de ondas SVG, corrientes dibujadas en canvas y ondas al mover el cursor o tocar el fondo. Las gotas suspendidas, el reflejo sobre la fotografía y la oscilación del material WebGL comparten el control de pausa. Las entradas de texto siguen completándose aunque se pause el movimiento. El canvas se limita a 25 fps y deja de actualizarse fuera de vista o con la pestaña oculta. Se respeta la preferencia de movimiento reducido. Las fichas entran en secuencia y el indicador del ICA se desplaza al presentar el resultado, sin modificar el valor numérico ni sus cálculos.
