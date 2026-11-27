@@ -76,6 +76,19 @@ if (typeof document !== 'undefined') {
   const byId = id=>document.getElementById(id);
   const number = new Intl.NumberFormat('es-PE',{maximumSignificantDigits:5});
   const format = value=>value===null ? '—' : number.format(value);
+  const scoreFormat = new Intl.NumberFormat('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const scoreColors = {excelente:['#3b6fbe','#eff5fe'],bueno:['#087c8d','#edf8fa'],regular:['#45845c','#edf7ed'],malo:['#966f19','#fcf7e7'],pesimo:['#aa4550','#fff0f1']};
+  const infoIcon = '<svg aria-hidden="true" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 9v4m0-7v.2"/></svg>';
+  function gauge(value) {
+    const point = (v,r=125)=>{const a=Math.PI*(1-v/100);return [150+r*Math.cos(a),145-r*Math.sin(a)]};
+    const cuts = [[0,30,'#b86b72'],[30,45,'#c5a455'],[45,75,'#83b594'],[75,90,'#6eafb9'],[90,100,'#7c9dcf']];
+    const arcs = cuts.map(([start,end,color])=>{
+      const a=point(start+.6),b=point(end-.6);
+      return `<path d="M${a.join(' ')} A125 125 0 0 1 ${b.join(' ')}" stroke="${color}" stroke-width="8" fill="none" stroke-linecap="round"/>`;
+    }).join('');
+    const dot=point(Math.max(0,Math.min(100,value)));
+    return `<div class="gauge"><svg viewBox="0 0 300 165" aria-hidden="true">${arcs}<circle cx="${dot[0]}" cy="${dot[1]}" r="8" fill="var(--deep)" stroke="white" stroke-width="3"/></svg><div class="gauge-values"><strong class="index-value">${scoreFormat.format(value)}</strong><div class="score-total">de 100 puntos</div></div><div class="gauge-labels" aria-hidden="true"><span>0</span><span>100</span></div></div>`;
+  }
   const classificationRows = [...document.querySelectorAll('.ica-table tbody tr')];
   function markClassification(results = []) {
     for (const row of classificationRows) {
@@ -121,7 +134,7 @@ if (typeof document !== 'undefined') {
       input.addEventListener('input',()=>{
         values[p]=input.value;sample=false;
         byId('sample').textContent='';
-        byId('result').textContent='Pulsa Calcular ICA para actualizar el resultado.';
+        byId('result').innerHTML='<div class="result-empty">'+infoIcon+'Tus mediciones han cambiado.<br>Pulsa <strong>Calcular ICA</strong> para actualizar el resultado.</div>';
         markClassification();
       });
       return div;
@@ -146,14 +159,17 @@ if (typeof document !== 'undefined') {
     }
     const ranges = mode==='nine'?panelNine:mode==='three'?data.multi:null;
     const outside = ranges ? active().filter((_,i)=>inputs[i]<ranges.min[i]||inputs[i]>ranges.max[i]) : [];
-    result.innerHTML=`<h3>${mode==='full'?'ICA estimado por la ANN':mode==='nine'?'ICA con tres concentraciones estimadas':'ICA con nueve concentraciones estimadas'}</h3>
-      <div class="index-row"><strong class="index-value">${format(ica)}</strong><span>/ 100 · ${classifyICA(ica).label}</span></div>
-      <div class="track" aria-hidden="true"><span style="width:${ica}%"></span></div>
-      <p class="sub-result">${mode==='full'?'ICA por fórmula con las entradas: '+format(modelResult.ica)+' · '+classifyICA(modelResult.ica).label+'. ':''}
-      ${modelResult.count} parámetros exceden el ECA según los valores usados en la fórmula. F1 y F2: ${format(modelResult.f1)} %. F3: ${format(modelResult.f3)} %.</p>
-      ${sample?`<p class="small">ICA de referencia del episodio: ${format(data.example.reference)}.</p>`:''}
-      ${outside.length?`<p class="small">Fuera del rango de entrenamiento: ${outside.map(p=>data.names[p].label).join(', ')}.</p>`:''}
-      ${mode==='nine'?'<p class="small">Ridge · 44 de 45 episodios retrospectivos dentro de 3 puntos del ICA. La precisión de las concentraciones se evalúa por separado.</p>':''}`;
+    const category=classifyICA(ica),colors=scoreColors[category.key];
+    result.style.setProperty('--score-color',colors[0]);
+    result.style.setProperty('--score-soft',colors[1]);
+    result.innerHTML=`<div class="result-head"><p class="eyebrow">RESULTADO DEL MONITOREO</p><span class="model-pill">${mode==='nine'?'Ridge + fórmula':mode==='three'?'ANN + fórmula':'Red neuronal'}</span></div>
+      <h3>${mode==='full'?'ICA estimado por la ANN':mode==='nine'?'ICA con tres concentraciones estimadas':'ICA con nueve concentraciones estimadas'}</h3>
+      ${gauge(ica)}<div class="result-category"><span class="category-badge">${category.label}</span></div>
+      <dl class="result-factors"><div><dt>Incumplimientos</dt><dd>${modelResult.count}<small> / 12</small></dd></div><div><dt>F1 y F2</dt><dd>${scoreFormat.format(modelResult.f1)}<small> %</small></dd></div><div><dt>F3</dt><dd>${scoreFormat.format(modelResult.f3)}<small> %</small></dd></div></dl>
+      <p class="sub-result">${modelResult.count} de los doce parámetros exceden el ECA según los valores usados en la fórmula.</p>
+      ${mode==='full'?`<div class="formula-comparison"><span>ICA calculado por fórmula</span><strong>${scoreFormat.format(modelResult.ica)} <small>· ${classifyICA(modelResult.ica).label}</small></strong></div>`:''}
+      ${sample?`<p class="small">ICA de referencia del ejemplo: ${scoreFormat.format(data.example.reference)}.</p>`:''}
+      ${outside.length?`<div class="result-note range-note">${infoIcon}<span>Fuera del rango de entrenamiento: ${outside.map(p=>data.names[p].label).join(', ')}.</span></div>`:''}`;
     if (mode!=='full') {
       const dl=document.createElement('dl');
       dl.className='outputs';
@@ -163,8 +179,21 @@ if (typeof document !== 'undefined') {
         value.textContent=format(modelResult.estimates[i])+' '+data.names[p].unit;
         dl.append(label,value);
       });
-      result.append(dl);
+      const heading=document.createElement('h4');
+      heading.className='outputs-heading';
+      heading.textContent='Concentraciones estimadas';
+      result.append(heading,dl);
     }
+    const note=document.createElement('div');
+    note.className='result-note';
+    note.innerHTML=infoIcon+'<span>'+(mode==='nine'?'Ridge · 44 de 45 episodios retrospectivos dentro de 3 puntos del ICA. La precisión de las concentraciones se evalúa por separado.':mode==='three'?'Las nueve concentraciones son estimaciones de la ANN. Un ICA cercano no garantiza la precisión de cada parámetro.':'La ANN aproxima el ICA. El cálculo por fórmula con las doce mediciones es la referencia del panel parcial.')+'</span>';
+    result.append(note);
+    const updated=document.createElement('div');
+    updated.className='result-updated';
+    updated.innerHTML='<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m4 10 4 4 8-8"/></svg> Resultado actualizado · ICA-PE parcial';
+    result.append(updated);
+    result.classList.remove('result-enter');
+    requestAnimationFrame(()=>result.classList.add('result-enter'));
     markClassification(mode==='full'
       ? [{label:'ICA ANN',value:ica},{label:'ICA por fórmula',value:modelResult.ica}]
       : [{label:'ICA con estimaciones',value:ica}]);
@@ -178,7 +207,12 @@ if (typeof document !== 'undefined') {
     byId(id).addEventListener('click',()=>{mode=next;form();render()});
   }
   byId('example').addEventListener('click',showExample);
-  byId('form').addEventListener('submit',event=>{event.preventDefault();render()});
+  byId('form').addEventListener('submit',event=>{
+    event.preventDefault();render();
+    if (window.matchMedia('(max-width: 760px)').matches && byId('result').querySelector('.gauge')) {
+      byId('result').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+    }
+  });
   showExample();
 
 }

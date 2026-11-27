@@ -5,36 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Demostración del modelo ICA-PE entrenado con los monitoreos del lago Chinchaycocha.">
   <title>Índice de calidad de Agua</title>
-  <link rel="stylesheet" href="estilos.css">
-  <link rel="stylesheet" href="portada.css">
+  <meta name="theme-color" content="#102f38">
+  <link rel="preload" as="image" href="chinchaycocha.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css?v=20261127">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.js?v=20261127"></script>
 </head>
 <body>
-  <header class="top"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span> Chinchaycocha</a><nav aria-label="Secciones"><a href="#simulador">Simulador</a></nav></header>
+  <a class="skip-link" href="#simulador">Ir al simulador</a>
+  <header class="top"><div class="nav-inner wrap"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M4 13c4-7 8 7 12 0s8 7 12 0M4 20c4-7 8 7 12 0s8 7 12 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><span>Chinchaycocha<small>CALIDAD DEL AGUA</small></span></a><nav aria-label="Secciones"><a href="#simulador">Simulador</a><a href="#interpretacion">Interpretación</a><a class="nav-method" href="metodologia_ICA_PE_2018.pdf" target="_blank" rel="noopener">Guía metodológica <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 4h5v5M16 4l-7 7M8 4H4v12h12v-4"/></svg></a></nav></div></header>
   <main id="inicio">
-    <section class="hero">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-grid">
-        <div><p class="eyebrow">Lago Chinchaycocha · Junín</p><h1>Índice de calidad de Agua</h1><p class="intro">Explora cómo una red neuronal estima el ICA-PE y qué cambia cuando se miden solo tres parámetros.</p><a class="hero-button" href="#simulador">Probar el modelo <span aria-hidden="true">↘</span></a></div>
+        <div class="hero-content"><p class="hero-label"><span aria-hidden="true"></span> CIENCIA DE DATOS · INGENIERÍA AMBIENTAL</p><h1 id="hero-title">Índice de calidad<br>de <em>Agua</em></h1><p class="intro">Del monitoreo a una visión más clara del agua. Explora el ICA-PE con mediciones y modelos predictivos.</p><div class="hero-actions"><a class="hero-button" href="#simulador">Explorar el simulador <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a><span>Datos del lago.<br>Una nueva perspectiva.</span></div></div>
+        <div class="lake-caption"><span class="location-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span><div><strong>Lago Chinchaycocha</strong><span>Junín y Pasco · Perú</span></div><span class="lake-tag">ECOSISTEMA LACUSTRE</span></div>
       </div>
     </section>
+    <div class="process-strip"><div class="wrap process-inner"><p>Comprender el agua,<br><strong>desde los datos.</strong></p><div><span class="process-icon" aria-hidden="true">◌</span> Mediciones del monitoreo</div><span class="process-line" aria-hidden="true"></span><div><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="m7 5 10 7M7 19l10-7M12 7v10"/></svg> Modelos predictivos</div><span class="process-line" aria-hidden="true"></span><div><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19V9m7 10V4m7 15v-7M3 21h18"/></svg> Índice de calidad</div></div></div>
     <section id="simulador" class="wrap section">
-      <p class="eyebrow">Demostración</p><h2>Simulador del ICA-PE parcial</h2>
-      <p class="small">Aplicación referencial a un monitoreo con 12 parámetros. La guía recomienda 17 filas de parámetros para categoría 4. El panel del proyecto incluye cobre y cuenta con resultados incompletos para varias filas recomendadas.</p>
-      <div class="switch" role="group" aria-label="Modo de predicción"><button id="full-mode" type="button" aria-pressed="false">12 parámetros</button><button id="nine-mode" type="button" aria-pressed="true">9 parámetros</button><button id="three-mode" type="button" aria-pressed="false">3 parámetros</button></div>
+      <div class="section-heading"><div><p class="eyebrow">EXPLORA EL MODELO</p><h2>Los datos entran.<br>La calidad se hace visible.</h2></div><p class="section-intro">Elige tus mediciones, ingresa sus valores y explora el resultado del <strong>ICA-PE parcial de doce parámetros.</strong></p></div>
+      <div class="switch" role="group" aria-label="Modo de predicción"><button id="full-mode" type="button" aria-pressed="false"><span class="mode-top"><span class="mode-count">12</span><span class="mode-check" aria-hidden="true">✓</span></span><strong>Parámetros medidos</strong><span class="mode-description">ANN y cálculo por fórmula</span><span class="mode-tag">COMPARACIÓN DIRECTA</span></button><button id="nine-mode" type="button" aria-pressed="true"><span class="mode-top"><span class="mode-count">9<span> + 3</span></span><span class="mode-check" aria-hidden="true">✓</span></span><strong>Mediciones + estimaciones</strong><span class="mode-description">Ridge estima tres parámetros</span><span class="mode-tag">PANEL DE NUEVE ENTRADAS</span></button><button id="three-mode" type="button" aria-pressed="false"><span class="mode-top"><span class="mode-count">3<span> + 9</span></span><span class="mode-check" aria-hidden="true">✓</span></span><strong>Exploración reducida</strong><span class="mode-description">ANN estima nueve parámetros</span><span class="mode-tag">EXPLORACIÓN CON TRES ENTRADAS</span></button></div>
       <div class="demo-grid">
         <form class="panel" id="form">
-          <div class="panel-top"><h3>Entradas del monitoreo</h3><button class="secondary" id="example" type="button">Cargar ejemplo</button></div>
+          <div class="panel-top"><div><p class="eyebrow">TUS MEDICIONES</p><h3>Entradas del monitoreo</h3></div><button class="secondary" id="example" type="button"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 7a6 6 0 1 1 0 6M4 3v4h4"/></svg>Cargar ejemplo</button></div>
           <p id="instructions"></p><p class="small" id="sample"></p>
           <div class="fields" id="fields"></div>
-          <button class="primary" type="submit">Calcular ICA</button>
+          <div class="form-actions"><span><svg aria-hidden="true" viewBox="0 0 20 20"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5Z"/><path d="m7 9 2 2 4-4"/></svg>Cálculo en tu navegador</span><button class="primary" type="submit">Calcular ICA <svg aria-hidden="true" viewBox="0 0 20 20"><rect x="4" y="2" width="12" height="16" rx="2"/><path d="M7 6h6M7 10h1m4 0h1m-6 4h1m4 0h1"/></svg></button></div>
         </form>
         <article class="panel results" id="result" aria-live="polite"></article>
       </div>
-      <section class="panel ica-guide" aria-labelledby="ica-guide-title">
-        <p class="eyebrow">Cuadro N.º 05 · ICA-PE · ANA 2018</p>
-        <h3 id="ica-guide-title">Interpretación de la calificación ICA</h3>
+      <aside class="scope-note"><span aria-hidden="true">i</span><p><strong>Un panel parcial, un alcance definido.</strong> Aplicación referencial a un monitoreo con 12 parámetros. La guía recomienda 17 filas de parámetros para categoría 4. El panel del proyecto incluye cobre y cuenta con resultados incompletos para varias filas recomendadas.</p></aside>
+      <section id="interpretacion" class="panel ica-guide" aria-labelledby="ica-guide-title">
+        <div class="guide-heading"><div><p class="eyebrow">COMPRENDE TU RESULTADO</p><h3 id="ica-guide-title">¿Qué nos dice el ICA?</h3></div><span class="source-tag">ICA-PE · ANA 2018</span></div>
+        <p class="guide-intro">Cada valor tiene una interpretación. Tu resultado se destaca automáticamente en la escala.</p>
         <p id="ica-guide-status" class="sub-result" role="status"></p>
         <div class="table-scroll ica-table-wrap">
           <table class="ica-table">
@@ -53,6 +60,6 @@
       </section>
     </section>
   </main>
-  <footer class="wrap">Ingeniería Ambiental · Lago Chinchaycocha <a href="#inicio">Volver arriba ↑</a></footer>
+  <footer><div class="wrap footer-inner"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span>Chinchaycocha</a><p>Ingeniería Ambiental<br><span>Ciencia de datos para comprender el agua.</span></p><a href="#inicio">Volver al inicio</a></div></footer>
 </body>
 </html>
