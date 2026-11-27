@@ -23,3 +23,7 @@ Se retiraron los anillos, retículas, brillos de neón, mensajes promocionales y
 - WebGL limitado a 30 fps y densidad máxima de 1,5; se detiene fuera de vista y en pestañas ocultas. Hay alternativa SVG si WebGL no está disponible.
 - La foto y el material 3D se vinculan visualmente mediante refracción y Fresnel. No hay indicadores ficticios de datos en vivo.
 - Los pesos de modelos, fórmulas, criterios del ECA y clasificación del ICA permanecen separados de la presentación.
+
+## Mapa interactivo del panel
+
+La portada combina una superficie de color profundo con la fotografía y el material refractivo. El selector incorpora un mapa de los doce parámetros: cada modo diferencia las mediciones de entrada de los valores que estima el modelo. Las fichas de mediciones llevan el foco al campo correspondiente; las fichas estimadas explican su origen. El panel se puede plegar mediante un control nativo `details` y es accesible con teclado. La visualización representa la configuración del modelo y no añade observaciones ni modifica sus cálculos.

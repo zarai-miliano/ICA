@@ -205,3 +205,73 @@ footer>.wrap>a:last-child { font-size: 12px; text-decoration: none; color: #5a75
 }
 @media(max-width:360px) { nav a:first-child { display: none; }.hero h1 { font-size: 61px; }.lake-visual figcaption { padding: 12px; }.scene-toggle span { max-width: 68px; }.result-factors dt { font-size: 10px; }.result-factors dd { font-size: 17px; }.form-actions>span { max-width: 106px; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; }*,*:before,*:after { animation: none!important; transition: none!important; }.water-scene { transform: none; } }
+/* Immersive lake composition and a functional map of model inputs. */
+.top { background: #123b42f5; border-bottom-color: #d9f2e61c; }
+.top .brand { color: #f1f7ed; }
+.top .brand small { color: #b4cbc5; }
+.top .brand-symbol { color: #b7dcb8; }
+nav a { color: #d2e4dd; }
+nav a:hover { color: white; }
+.nav-method { border-color: #668a864d; }
+.top :focus-visible { outline-color: #c0e7b4; }
+.hero { position: relative; isolation: isolate; overflow: hidden; color: #eef4ed; background: #123b42; border-bottom: 0; }
+.hero:before { content: ''; position: absolute; width: 70%; height: 100%; right: 0; top: 0; z-index: -1; background: radial-gradient(ellipse at 85% 25%,#5c969326,transparent 70%); }
+.hero:after { content: ''; position: absolute; right: -60px; bottom: -70px; width: 60%; height: 250px; border: 1px solid #cee8d116; border-radius: 50%; transform: rotate(-17deg); z-index: -1; box-shadow: 0 0 0 28px #cee8d108,0 0 0 56px #cee8d106; }
+.hero-grid { grid-template-columns: 1fr 1.12fr; gap: 58px; padding-block: 74px 76px; }
+.hero-content { position: relative; z-index: 2; }
+.hero .eyebrow { display: flex; align-items: center; gap: 11px; color: #b9d4c8; letter-spacing: 1.7px; }
+.hero-rule { width: 26px; height: 1px; background: #b5d5b8; }
+.hero h1 { font-size: clamp(72px,7.2vw,98px); letter-spacing: -.035em; margin-bottom: 28px; }
+.hero h1 em { color: #c6e3b8; }
+.hero .intro { color: #c1d5ce; font-size: 17px; max-width: 385px; }
+.hero-button { background: #d7eac9; border-color: #d7eac9; color: #173d40; padding: 15px 23px; box-shadow: 0 5px 0 #081c2426; }
+.hero-button:hover { background: #edf7de; border-color: #edf7de; }
+.hero-footnote { display: flex; gap: 10px; margin-top: 31px; color: #bdd1c7; font-size: 11px; }
+.hero-footnote>span { padding: 5px 10px; border: 1px solid #a6c9b23d; border-radius: 3px; color: inherit; }
+.lake-visual { height: 540px; border-radius: 7px 100px 7px 7px; transform: rotate(1deg); border: 1px solid #d5e8d34d; box-shadow: 0 25px 55px #071e293d; overflow: hidden; }
+.lake-image { filter: saturate(.85); object-position: 53% center; }
+.photo-shade { background: linear-gradient(0deg,#10383ed9,transparent 55%); }
+.photo-label { font-size: 27px; right: 34px; top: 36px; }
+.water-scene { width: 90%; height: 455px; bottom: 32px; right: -8px; }
+.lake-visual figcaption { padding: 25px; }
+.scene-toggle { background: #123c4780; border-color: #e6f3e866; backdrop-filter: blur(7px); }
+.section-heading { padding-top: 4px; }
+.section-heading h2 { font-size: 40px; letter-spacing: -.04em; }
+.switch { background: #e4ece5; border-color: #c8d7cc; padding: 6px; gap: 6px; }
+.switch button { border-radius: 5px; padding-block: 20px; }
+.switch button[aria-pressed=true] { box-shadow: 0 3px 9px #224b3910; border-color: #96b8a4; }
+.mode-count { font-size: 48px; }
+.panel { border-color: #cedbd2; border-radius: 10px; box-shadow: 0 6px 22px #123c4205; }
+.panel-top { padding-bottom: 17px; border-bottom: 1px solid #e3eae3; margin-bottom: 17px; }
+.panel-top h3 { font-size: 22px; }
+.field input { background: #f6f9f4; border-color: #c5d7c9; padding-block: 12px; border-radius: 5px; }
+.results { background: radial-gradient(ellipse at 50% 0%,#32657475,transparent 65%),#193c4a; border-color: #315a65; box-shadow: 0 12px 35px #173c4714; }
+.result-head { border-bottom: 1px solid #b3d7d51f; padding-bottom: 16px; }
+.gauge { background: radial-gradient(ellipse at 50% 66%,#7bafaa16,transparent 62%); }
+.gauge>svg { filter: drop-shadow(0 5px 6px #071d2b28); }
+.result-factors { background: #7eaba60b; padding-block: 19px; }
+.parameter-panel { background: #ecf1eb; border: 1px solid #cedbcf; border-radius: 8px; padding: 0; margin: 0 0 27px; overflow: hidden; }
+.parameter-panel summary { padding: 17px 22px; display: grid; grid-template-columns: 1fr auto 20px; align-items: center; gap: 18px; color: #264d43; font-size: 14px; font-weight: 500; }
+.parameter-panel summary:after { text-align: right; }
+#panel-composition { font-size: 12px; color: #64806c; font-weight: 400; }
+.parameter-legend { display: flex; gap: 21px; padding: 3px 22px 16px; color: #5c7965; font-size: 12px; }
+.parameter-legend>span { display: inline-flex; align-items: center; gap: 6px; }
+.parameter-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; }
+.legend-measured { background: #346f5a; }
+.legend-estimated { border: 1px dashed #779b83; background: white; }
+.parameter-map { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 8px; padding: 0 22px; }
+.parameter-chip { position: relative; display: flex; flex-direction: column; align-items: start; gap: 5px; padding: 11px 12px; min-height: 85px; text-align: left; border: 1px solid #c0d3c3; border-radius: 5px; background: #f9fbf6; color: #2c5d4b; transition: background .18s, border-color .18s; }
+.parameter-chip strong { font-family: var(--font); font-size: 22px; line-height: 1.2; font-weight: 500; letter-spacing: -.7px; }
+.parameter-chip>span { font-size: 11px; line-height: 1.5; color: #5d7663; }
+.parameter-chip.is-measured { background: #e0ece0; border-color: #b4cdbb; }
+.parameter-chip.is-estimated { border-style: dashed; }
+.parameter-chip.is-estimated strong { color: #749481; }
+.parameter-chip:hover { background: white; border-color: #54886c; }
+.parameter-hint { font-size: 12px; color: #56705d; margin: 13px 22px 17px; min-height: 22px; }
+.ica-guide { background: white; border: 1px solid #d4dfd3; border-radius: 10px; padding: 30px; }
+.guide-heading h2 { font-size: 33px; }
+@media(min-width:1400px) { .hero-grid { padding-block: 86px; }.lake-visual { height: 570px; } }
+@media(max-width:1050px) { .hero-grid { gap: 32px; }.hero h1 { font-size: 81px; }.lake-visual { height: 510px; }.water-scene { height: 420px; }.hero-footnote { font-size: 10px; gap: 7px; }.hero-footnote>span { padding-inline: 8px; }.mode-count { font-size: 43px; }.parameter-map { grid-template-columns: repeat(6,minmax(0,1fr)); }.parameter-chip { padding: 10px; } }
+@media(max-width:760px) { .hero-grid { grid-template-columns: 1fr; padding-block: 46px 40px; gap: 37px; }.hero h1 { font-size: clamp(74px,12vw,94px); }.hero .intro { max-width: 440px; font-size: 16px; }.lake-visual { height: 410px; border-top-right-radius: 75px; transform: none; }.water-scene { height: 370px; width: 78%; bottom: 15px; }.hero-footnote { margin-top: 27px; font-size: 11px; }.photo-label { top: 28px; right: 30px; }.section-heading h2 { font-size: 35px; }.mode-count { font-size: 38px; }.switch button { padding-block: 16px; }.parameter-map { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; }.parameter-panel summary { padding: 16px 18px; gap: 10px; }.parameter-legend { padding-inline: 18px; }.parameter-map { padding-inline: 18px; }.parameter-hint { margin-inline: 18px; }.parameter-chip { min-height: 90px; }.ica-guide { padding: 23px; }.guide-heading h2 { font-size: 29px; } }
+@media(max-width:420px) { .hero-grid { padding-block: 38px 30px; }.hero h1 { font-size: 76px; }.hero-footnote { font-size: 10px; }.lake-visual { height: 350px; }.water-scene { height: 305px; bottom: 18px; width: 94%; right: -20px; }.lake-visual figcaption { padding: 16px; }.photo-label { font-size: 24px; top: 24px; }.section-heading h2 { font-size: 31px; }.switch { gap: 3px; padding: 4px; }.switch button { padding-inline: 8px; }.mode-count { font-size: 36px; }.parameter-panel summary { grid-template-columns: 1fr 20px; gap: 4px; font-size: 13px; }#panel-composition { grid-column: 1; grid-row: 2; font-size: 11px; }.parameter-panel summary:after { grid-column: 2; grid-row: 1 / 3; }.parameter-map { gap: 6px; padding-inline: 13px; }.parameter-chip { padding: 9px 7px; min-height: 91px; }.parameter-chip strong { font-size: 20px; }.parameter-chip>span { font-size: 10px; overflow-wrap: anywhere; }.parameter-legend { padding-inline: 13px; gap: 13px; font-size: 11px; }.parameter-hint { margin-inline: 13px; font-size: 11px; }.panel-top h3 { font-size: 20px; }.guide-heading h2 { font-size: 27px; }.ica-guide { padding: 20px; } }
+@media(max-width:360px) { .hero h1 { font-size: 67px; }.hero-footnote { flex-wrap: wrap; }.parameter-map { grid-template-columns: repeat(3,minmax(0,1fr)); }.parameter-chip { min-height: 83px; } }

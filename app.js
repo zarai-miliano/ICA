@@ -112,6 +112,34 @@ if (typeof document !== 'undefined') {
   const fields = byId('fields');
   const active = ()=>mode==='full'?data.order:mode==='nine'?panelNine.inputs:data.inputs;
   const modes = [['full-mode','full'],['nine-mode','nine'],['three-mode','three']];
+  const symbols = {DBO5:'DBO₅',OD:'OD',pH:'pH',P_total:'P',N_total:'N',As:'As',Hg:'Hg',Pb:'Pb',Zn:'Zn',Cu:'Cu',Coliformes:'CT',SST:'SST'};
+
+  function renderParameterMap() {
+    const measured = active();
+    byId('panel-composition').textContent = measured.length+' medidos'+(measured.length<12?' · '+(12-measured.length)+' estimados':' · panel completo');
+    byId('parameter-hint').textContent='Selecciona un parámetro para ver su origen o ir a su campo.';
+    byId('parameter-map').replaceChildren(...data.order.map(p=>{
+      const isMeasured=measured.includes(p);
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='parameter-chip '+(isMeasured?'is-measured':'is-estimated');
+      button.setAttribute('aria-label',data.names[p].label+': '+(isMeasured?'medición de entrada, ir al campo':'valor estimado'));
+      const symbol=document.createElement('strong'),label=document.createElement('span');
+      symbol.textContent=symbols[p];label.textContent=data.names[p].label;
+      button.append(symbol,label);
+      button.addEventListener('click',()=>{
+        byId('parameter-hint').textContent=isMeasured
+          ? data.names[p].label+': ingresa el resultado medido en '+data.names[p].unit+'.'
+          : data.names[p].label+': se estima con '+(mode==='nine'?'Ridge':'la ANN')+' a partir de las mediciones de entrada.';
+        if (isMeasured) {
+          const field=byId('value-'+p);
+          field.focus({preventScroll:true});
+          field.scrollIntoView({block:'center',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+        }
+      });
+      return button;
+    }));
+  }
 
   function form() {
     for (const [id,name] of modes) byId(id).setAttribute('aria-pressed',String(mode===name));
@@ -144,6 +172,7 @@ if (typeof document !== 'undefined') {
       return div;
     }));
     byId('sample').textContent = sample ? `Ejemplo histórico · ${data.example.point} · ${data.example.date} · entradas del Excel L/2` : '';
+    renderParameterMap();
   }
 
   function render() {
