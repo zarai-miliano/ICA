@@ -6,16 +6,18 @@
   <meta name="description" content="Simulador del ICA-PE parcial del lago Chinchaycocha: mediciones de calidad del agua, modelos predictivos e interpretación de resultados.">
   <meta name="theme-color" content="#123b42">
   <title>Índice de calidad de Agua · Chinchaycocha</title>
-  <link rel="preload" as="image" href="chinchaycocha.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/chinchaycocha-poster.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css?v=water-motion-1">
+  <link rel="stylesheet" href="territorio.css?v=2">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
   <script defer src="app.js?v=water-motion-1"></script>
   <script defer src="escena-3d.js?v=water-motion-1"></script>
   <script defer src="movimiento.js?v=1"></script>
+  <script defer src="territorio.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#simulador">Ir al simulador</a>
@@ -26,6 +28,7 @@
         <span>Chinchaycocha<small>CALIDAD DEL AGUA</small></span>
       </a>
       <nav aria-label="Secciones">
+        <a class="nav-lake" href="#el-lago">El lago</a>
         <a href="#simulador">Simulador</a>
         <a href="#interpretacion">Interpretación</a>
         <a class="nav-method" href="metodologia_ICA_PE_2018.pdf" target="_blank" rel="noopener">Metodología <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 4h5v5M16 4l-7 7M8 4H4v12h12v-4"/></svg></a>
@@ -34,15 +37,18 @@
   </header>
   <main id="inicio">
     <section class="hero" aria-labelledby="hero-title">
+      <div class="panoramic-landscape" aria-hidden="true"><img class="landscape-day" src="assets/chinchaycocha-poster.jpg" width="752" height="424" alt="" fetchpriority="high"><video class="landscape-video" id="lake-video" muted loop playsinline preload="none" poster="assets/chinchaycocha-poster.jpg"><source src="assets/chinchaycocha-fondo.mp4" type="video/mp4"></video><img class="landscape-evening" src="assets/atardecer-junin.jpg" width="3000" height="2000" alt=""></div>
       <canvas class="water-atmosphere" id="water-atmosphere" aria-hidden="true"></canvas>
+      <div class="sky-birds" aria-hidden="true"><svg viewBox="0 0 160 60"><path d="M5 30q13-15 26 0 13-15 26 0M70 15q9-11 18 0 9-11 18 0M110 43q10-12 20 0 10-12 20 0"/></svg></div>
       <div class="floating-water" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
       <div class="wrap hero-grid">
         <div class="hero-content">
-          <p class="eyebrow"><span class="hero-rule" aria-hidden="true"></span>Lago Chinchaycocha · Perú</p>
+          <p class="eyebrow"><span class="hero-rule" aria-hidden="true"></span>Entre el agua y los Andes</p>
           <h1 id="hero-title"><span class="title-line">Índice de calidad</span><span class="title-line">de <em>Agua</em></span></h1>
-          <p class="intro">Una herramienta para estudiar la calidad del agua del lago, a partir de mediciones y modelos predictivos.</p>
+          <p class="intro">Conocer el agua de Chinchaycocha es una forma de cuidar la vida que depende de ella.</p>
           <a class="hero-button" href="#simulador">Abrir simulador <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a>
           <div class="hero-footnote"><span>ICA-PE parcial</span><span>ECA · Categoría 4 / E1</span></div>
+          <div class="landscape-switch" role="group" aria-label="Fotografía de la portada"><button type="button" data-light="day" aria-pressed="true"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3"/><path d="M10 1v2m0 14v2M1 10h2m14 0h2M4 4l1 1m10 10 1 1M4 16l1-1M15 5l1-1"/></svg>De día</button><button type="button" data-light="evening" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 14h16M4 11a6 6 0 0 1 12 0M10 1v2M2 4l2 2m14-2-2 2M3 17h14"/></svg>Atardecer</button></div>
         </div>
         <figure class="lake-visual">
           <img class="lake-image" src="chinchaycocha.jpg" alt="Vista panorámica del lago Chinchaycocha y sus humedales, con montañas al fondo." width="1280" height="418" fetchpriority="high">
@@ -54,11 +60,32 @@
           <span class="photo-label" aria-hidden="true">Reflejos del lago.</span>
           <figcaption>
             <div><strong>Lago Chinchaycocha</strong><span>Junín y Pasco · Perú</span></div>
-            <button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false" aria-controls="water-canvas"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Pausar movimiento</span></button>
+            <button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false" aria-controls="water-canvas lake-video"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Pausar movimiento</span></button>
           </figcaption>
         </figure>
       </div>
+      <div class="lake-signature wrap"><div><span>Reserva Nacional de Junín</span><strong>Chinchaycocha</strong></div><a href="#el-lago">Descubre el ecosistema <span class="scroll-capsule" aria-hidden="true"><i></i></span></a></div>
+      <div class="shore-reeds" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <svg class="hero-waves" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><defs><path id="shore-wave" d="M0 70Q180 10 360 70T720 70T1080 70T1440 70T1800 70T2160 70T2520 70T2880 70V180H0Z"/></defs><g transform="translate(0,-8)" fill="#71a7a2" opacity=".18"><use class="wave-layer wave-back" href="#shore-wave"/></g><g transform="translate(0,13)" fill="#b2d3c1" opacity=".26"><use class="wave-layer wave-middle" href="#shore-wave"/></g><g transform="translate(0,33)" fill="#f7f8f5"><use class="wave-layer wave-near" href="#shore-wave"/></g></svg>
+    </section>
+    <section class="lake-story wrap" id="el-lago" aria-labelledby="lake-story-title">
+      <div class="story-heading"><p class="eyebrow">El lugar detrás de los datos</p><h2 id="lake-story-title">Un espejo de agua.<br><em>Todo un mundo vivo.</em></h2><p>En la meseta de Bombón, entre Junín y Pasco, el paisaje del lago se entrelaza con humedales y especies que lo hacen único.</p></div>
+      <div class="habitat-explorer">
+        <div class="habitat-menu" role="group" aria-label="Explorar el ecosistema">
+          <button type="button" class="habitat-choice" data-habitat="landscape" aria-pressed="true" aria-controls="habitat-landscape"><span class="habitat-icon" aria-hidden="true">≈</span><span><strong>El paisaje</strong><small>Agua, cielo y cordillera</small></span><span class="choice-mark" aria-hidden="true">+</span></button>
+          <button type="button" class="habitat-choice" data-habitat="bird" aria-pressed="false" aria-controls="habitat-bird"><svg class="habitat-icon" aria-hidden="true" viewBox="0 0 36 36"><path d="M4 24q8 4 19 0l4-5-1-9 4 2-3 3M23 24q-5-8-12-4l-7 4M11 20l-4-4"/></svg><span><strong>La vida del lago</strong><small>El zambullidor de Junín</small></span><span class="choice-mark" aria-hidden="true">+</span></button>
+          <button type="button" class="habitat-choice" data-habitat="wetland" aria-pressed="false" aria-controls="habitat-wetland"><svg class="habitat-icon" aria-hidden="true" viewBox="0 0 36 36"><path d="M18 31V5M18 24Q6 23 7 13q11 1 11 11M18 18Q30 17 29 7q-11 1-11 11M4 31h28"/></svg><span><strong>Los humedales</strong><small>Un territorio conectado al agua</small></span><span class="choice-mark" aria-hidden="true">+</span></button>
+          <p class="explorer-hint">Elige una mirada del lago.</p>
+        </div>
+        <div class="habitat-stage">
+          <article class="habitat-scene" id="habitat-landscape" aria-labelledby="habitat-landscape-title"><img src="assets/atardecer-junin.jpg" width="3000" height="2000" loading="lazy" alt="Atardecer de tonos dorados reflejado en el lago Junín, fotografiado desde Ondores."><div class="habitat-copy"><span class="scene-overline">Meseta de Bombón · Andes centrales</span><h3 id="habitat-landscape-title">El cielo también<br>habita el agua.</h3><p>Chinchaycocha es el segundo lago más extenso del Perú. Su paisaje forma parte de la Reserva Nacional de Junín.</p><a href="https://www.gob.pe/institucion/sernanp/noticias/614665-sernanp-presenta-libro-reserva-nacional-de-junin-un-espejo-en-medio-de-los-andes" target="_blank" rel="noopener">Conocer más en SERNANP</a></div></article>
+          <article class="habitat-scene" id="habitat-bird" aria-labelledby="habitat-bird-title" hidden><img src="assets/zambullidor-junin.jpg" width="2048" height="1365" loading="lazy" alt="Zambullidor de Junín de cuello blanco, cabeza oscura y ojo rojo nadando sobre el lago."><div class="habitat-copy"><span class="scene-overline"><i>Podiceps taczanowskii</i></span><h3 id="habitat-bird-title">Una vida ligada<br>a este lago.</h3><p>El zambullidor de Junín es una especie endémica: su hábitat natural se encuentra únicamente en Chinchaycocha.</p><a href="https://consultasenlinea.mincetur.gob.pe/fichaInventario/index.aspx?cod_Ficha=831" target="_blank" rel="noopener">Consultar el inventario de MINCETUR</a></div></article>
+          <article class="habitat-scene" id="habitat-wetland" aria-labelledby="habitat-wetland-title" hidden><img src="assets/lago-junin.jpg" width="1632" height="1232" loading="lazy" alt="Vegetación y espejos de agua en las orillas del lago Junín."><div class="habitat-copy"><span class="scene-overline">Humedal de importancia internacional</span><h3 id="habitat-wetland-title">Donde la tierra<br>se encuentra con el agua.</h3><p>La Reserva Nacional de Junín es sitio Ramsar desde 1997. Sus humedales forman parte del contexto ambiental que da sentido al estudio del agua.</p><a href="https://www.minam.gob.pe/diversidadbiologica/nuestras-lineas-de-intervencion/direccion-de-conservacion-sostenible-de-ecosistemas-y-especies/ecosistemas/" target="_blank" rel="noopener">Consultar los sitios Ramsar en MINAM</a></div></article>
+        </div>
+      </div>
+      <div class="lake-facts"><div><span>Territorio</span><strong>Junín <em>y</em> Pasco</strong></div><div><span>Altitud de la reserva</span><strong>≈ 4 100 <small>m s. n. m.</small></strong></div><div><span>Reserva Nacional de Junín</span><strong>53 000 <small>hectáreas</small></strong></div><div><span>Sitio Ramsar desde</span><strong>1997</strong></div></div>
+      <details class="landscape-credits"><summary>Fuentes del territorio y créditos de las imágenes</summary><p>Información de la reserva: <a href="https://app4.ign.gob.pe/capitulos/cuatro/conservacion.php" target="_blank" rel="noopener">Atlas del IGN</a>. Paisaje: SERNANP. Endemismo: MINCETUR. Designación Ramsar: MINAM (enlaces en cada escena). Las cifras corresponden a la reserva y no a la superficie del espejo de agua.</p><p><a href="https://commons.wikimedia.org/wiki/File:Atardecer_en_el_lago_Jun%C3%ADn.jpg" target="_blank" rel="noopener">Atardecer: Jonathan Chancasana</a> · <a href="https://commons.wikimedia.org/wiki/File:Junin_Grebe_(Podiceps_taczanowskii),_Jun%C3%ADn,_Peru_1.jpg" target="_blank" rel="noopener">Zambullidor: thibaudaronson</a> · <a href="https://commons.wikimedia.org/wiki/File:Lago_de_Junin-Juni_Peru.jpg" target="_blank" rel="noopener">Lago: Bernd Wolniczak</a>. Fotografías bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, mostradas con recorte visual. Video de portada y fotografía original proporcionados por la autora del proyecto.</p></details>
+      <div class="science-bridge"><svg aria-hidden="true" viewBox="0 0 100 40"><path d="M0 20q12-17 25 0t25 0t25 0t25 0"/></svg><p>Del paisaje a sus mediciones.<br><strong>Explora la calidad del agua con el ICA-PE.</strong></p><a href="#simulador">Usar el simulador</a></div>
     </section>
     <section id="simulador" class="wrap section" aria-labelledby="simulator-title">
       <div class="section-heading">

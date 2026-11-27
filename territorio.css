@@ -1,0 +1,107 @@
+/* Landscape, light and habitat: the visual identity of Chinchaycocha. */
+.hero { display: block; min-height: 810px; background: #123b42; }
+.hero:before { inset: 0; width: 100%; height: 100%; background: linear-gradient(90deg,#092b35eb 0%,#0b303ab8 38%,#10394318 78%),linear-gradient(0deg,#092f39 0%,#123b4210 55%); z-index: -1; }
+.hero:after { display: none; }
+.panoramic-landscape { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.panoramic-landscape img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; animation: landscape-breath 26s ease-in-out infinite alternate; }
+.panoramic-landscape .landscape-evening { opacity: 0; transition: opacity 1.6s; }
+.panoramic-landscape .landscape-evening { z-index: 2; }
+.landscape-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 1; transition: opacity 1.2s; }
+.hero.has-video .landscape-video { opacity: 1; }
+.hero[data-light=evening] .landscape-video { opacity: 0; }
+.hero[data-light=evening] .landscape-evening { opacity: 1; }
+.hero-grid { min-height: 650px; grid-template-columns: minmax(0,1.35fr) minmax(0,.65fr); padding-block: 80px 50px; gap: 35px; }
+.hero h1 { font-size: clamp(80px,8vw,114px); max-width: 780px; text-shadow: 0 4px 30px #092b3526; }
+.hero h1 em { color: #e7e5bc; }
+.hero h1 em:after { opacity: .65; }
+.hero .eyebrow { color: #f0f2df; font-size: 12px; letter-spacing: .17em; }
+.hero .intro { max-width: 370px; color: #f2f5e9; font-size: 18px; }
+.hero-button { background: #e7e5bc; border-color: #e7e5bc; color: #173d40; border-radius: 30px; gap: 27px; padding-inline: 27px; }
+.hero-footnote { color: #e1ece4; margin-top: 27px; }
+.hero-footnote>span { background: #11373b50; border-color: #e7ead74d; border-radius: 20px; }
+.landscape-switch { display: inline-flex; gap: 2px; padding: 4px; margin-top: 24px; border: 1px solid #e6ebda40; border-radius: 25px; background: #0c303b80; backdrop-filter: blur(12px); }
+.landscape-switch button { display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 14px; border: 0; border-radius: 22px; color: #e4ebe0; background: transparent; font-size: 13px; transition: background .25s,color .25s; }
+.landscape-switch svg { width: 16px; height: 16px; }
+.landscape-switch button[aria-pressed=true] { background: #e9eddf; color: #193c43; }
+.hero .lake-visual { display: block; width: min(100%,330px); height: 400px; justify-self: end; margin-top: 70px; border: 0; border-radius: 0; background: transparent; transform: none; overflow: visible; isolation: auto; box-shadow: none; }
+.hero .lake-image,.hero .photo-shade,.hero .photo-label,.hero .lake-visual:after { display: none; }
+.hero .water-scene { position: absolute; grid-area: auto; inset: 0; width: 100%; height: 100%; margin: 0; }
+.hero .lake-visual figcaption { position: absolute; display: flex; justify-content: end; inset: auto 15px -14px auto; width: auto; padding: 0; }
+.hero .lake-visual figcaption>div { display: none; }
+.hero .scene-toggle { border-radius: 25px; padding: 8px 14px; background: #143a4480; font-size: 12px; }
+.lake-signature { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: end; padding-bottom: 100px; }
+.lake-signature>div>span { display: block; color: #d8e7dd; font-size: 12px; letter-spacing: .1em; }
+.lake-signature strong { display: block; font-family: 'Instrument Serif',Georgia,serif; font-size: clamp(45px,6.5vw,89px); font-weight: 400; line-height: 1.3; letter-spacing: -.02em; }
+.lake-signature>a { display: flex; align-items: center; gap: 18px; text-decoration: none; font-size: 13px; padding-bottom: 12px; }
+.scroll-capsule { display: grid; place-items: start center; padding-top: 8px; width: 23px; height: 36px; border: 1px solid #b6ccbf; border-radius: 16px; }
+.scroll-capsule i { width: 3px; height: 7px; border-radius: 4px; background: #e6efdd; animation: scroll-rain 2s ease-in-out infinite; }
+.hero-waves { position: absolute; inset: auto 0 -1px; margin: 0; }
+.water-atmosphere { z-index: 0; opacity: .45; }
+.floating-water { opacity: .5; }
+.sky-birds { position: absolute; top: 12%; right: 6%; width: 145px; pointer-events: none; animation: sky-drift 20s ease-in-out infinite alternate; opacity: .75; }
+.sky-birds svg { width: 100%; height: auto; stroke: #e2efeb; stroke-width: 1.3; }
+.shore-reeds { position: absolute; bottom: 30px; right: 2%; width: 220px; height: 150px; z-index: 2; pointer-events: none; }
+.shore-reeds i { position: absolute; bottom: 0; left: calc(var(--reed) * 23px); width: 2px; height: calc(65px + var(--reed) * 9px); background: #c6d2aa80; transform-origin: bottom; transform: rotate(-12deg); animation: reed-wind 5s ease-in-out infinite alternate; animation-delay: calc(var(--reed) * -.38s); }
+.shore-reeds i:before { content: ''; position: absolute; left: -2px; top: 2px; width: 6px; height: 26px; border-radius: 8px; background: #c6d2aa90; }
+.shore-reeds i:after { content: ''; position: absolute; top: 40%; left: 0; width: 22px; height: 40px; border-left: 1px solid #c6d2aa90; border-radius: 100% 0 0 0; transform: rotate(20deg); }
+.shore-reeds i:nth-child(1){--reed:1}.shore-reeds i:nth-child(2){--reed:2}.shore-reeds i:nth-child(3){--reed:3}.shore-reeds i:nth-child(4){--reed:4}.shore-reeds i:nth-child(5){--reed:5}.shore-reeds i:nth-child(6){--reed:6}.shore-reeds i:nth-child(7){--reed:7}.shore-reeds i:nth-child(8){--reed:8}
+.lake-story { padding-top: 80px; padding-bottom: 20px; scroll-margin-top: 80px; }
+.story-heading { display: grid; grid-template-columns: 1.3fr .7fr; column-gap: 80px; align-items: end; margin-bottom: 45px; }
+.story-heading .eyebrow { grid-column: 1 / -1; margin-bottom: 20px; }
+.story-heading h2 { font-family: 'Instrument Serif',Georgia,serif; font-size: clamp(44px,5vw,67px); line-height: 1.05; font-weight: 400; letter-spacing: -.025em; }
+.story-heading h2 em { color: #577866; }
+.story-heading>p:last-child { color: #5c7070; line-height: 1.85; font-size: 16px; margin-bottom: 3px; }
+.habitat-explorer { display: grid; grid-template-columns: .7fr 1.3fr; gap: 42px; align-items: center; }
+.habitat-choice { display: flex; align-items: center; gap: 18px; border: 0; border-top: 1px solid #cbd8ce; width: 100%; background: transparent; padding: 25px 8px; text-align: left; color: #60746b; transition: color .3s,padding .3s; }
+.habitat-choice:last-of-type { border-bottom: 1px solid #cbd8ce; }
+.habitat-choice strong { display: block; font-family: 'Instrument Serif',Georgia,serif; font-weight: 400; font-size: 29px; line-height: 1.2; color: #35594d; }
+.habitat-choice small { display: block; margin-top: 6px; font-size: 13px; }
+.habitat-choice[aria-pressed=true] { color: #285f50; padding-left: 18px; background: linear-gradient(90deg,#e4ece2,transparent); }
+.habitat-choice[aria-pressed=true] .choice-mark { transform: rotate(45deg); color: #305e4d; }
+.choice-mark { margin-left: auto; font-size: 25px; font-weight: 400; transition: transform .3s; }
+.habitat-icon { display: block; width: 36px; height: 36px; flex-shrink: 0; stroke-width: 1.3; font-family: Georgia,serif; font-size: 37px; line-height: 1; }
+.explorer-hint { font-size: 13px; color: #688071; margin: 22px 8px 0; }
+.habitat-stage { position: relative; height: 510px; border-radius: 130px 8px 8px 8px; overflow: hidden; background: #173d43; box-shadow: 0 14px 35px #1c4a4010; }
+.habitat-scene { height: 100%; position: relative; animation: habitat-reveal .7s ease-out; }
+.habitat-scene[hidden] { display: none; }
+.habitat-scene:after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg,#0b2936f2,#0b293650 50%,transparent 75%); }
+.habitat-scene>img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 1s; }
+.habitat-stage:hover .habitat-scene>img { transform: scale(1.025); }
+#habitat-bird img { object-position: 63% 38%; }
+#habitat-wetland img { object-position: 40% top; height: 145%; }
+.habitat-copy { position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; z-index: 1; color: #f1f4e9; }
+.scene-overline { font-size: 11px; letter-spacing: .1em; color: #dde7d6; text-transform: uppercase; }
+.habitat-copy h3 { font-family: 'Instrument Serif',Georgia,serif; font-size: 42px; font-weight: 400; line-height: 1.05; margin: 12px 0 14px; }
+.habitat-copy p { font-size: 14px; line-height: 1.7; max-width: 440px; margin-bottom: 15px; }
+.habitat-copy a { font-size: 12px; text-underline-offset: 5px; color: #dce8ce; }
+.lake-facts { display: grid; grid-template-columns: 1fr 1fr 1.2fr .8fr; padding-block: 35px; border-bottom: 1px solid #cbd8ce; gap: 20px; }
+.lake-facts>div { border-right: 1px solid #cbd8ce; padding-right: 15px; }
+.lake-facts>div:last-child { border: 0; }
+.lake-facts span { display: block; font-size: 12px; color: #5c7769; margin-bottom: 9px; }
+.lake-facts strong { font-family: 'Instrument Serif',Georgia,serif; font-size: 34px; font-weight: 400; line-height: 1.2; color: #264e46; }
+.lake-facts em { font-weight: 400; }
+.lake-facts small { font: 12px var(--font); }
+.landscape-credits { margin-top: 15px; font-size: 12px; color: #667c6e; }
+.landscape-credits summary { font-size: 12px; min-height: 32px; display: flex; align-items: center; gap: 15px; padding-block: 4px; }
+.landscape-credits p { max-width: 1000px; line-height: 1.8; }
+.science-bridge { display: flex; align-items: center; gap: 25px; padding-top: 55px; }
+.science-bridge svg { width: 100px; height: 40px; stroke: #719981; stroke-width: 1; }
+.science-bridge p { font-size: 14px; color: #6b7e70; line-height: 1.7; margin: 0; }
+.science-bridge strong { color: #294c43; font-weight: 500; }
+.science-bridge a { margin-left: auto; padding: 11px 19px; border: 1px solid #a9bdaa; border-radius: 24px; text-decoration: none; font-size: 13px; color: #2a5144; transition: background .2s; }
+.science-bridge a:hover { background: #e2ebdf; }
+#simulador { padding-top: 70px; }
+:is([data-motion=paused],.hero-out-of-view,.page-hidden) :is(.panoramic-landscape img,.sky-birds,.shore-reeds i,.scroll-capsule i) { animation-play-state: paused; }
+@keyframes landscape-breath { from { transform: scale(1); } to { transform: scale(1.055); } }
+@keyframes sky-drift { from { transform: translateX(0) translateY(0); } to { transform: translateX(-85px) translateY(-16px); } }
+@keyframes reed-wind { from { transform: rotate(-12deg); } to { transform: rotate(4deg); } }
+@keyframes scroll-rain { 0%,100% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(10px); opacity: .2; } }
+@keyframes habitat-reveal { from { opacity: .5; transform: scale(1.035); } to { opacity: 1; transform: scale(1); } }
+@media(min-width:1400px) { .hero-grid { padding-block: 90px 55px; }.hero { min-height: 850px; } }
+@media(max-width:1050px) { .hero h1 { font-size: 86px; }.hero-grid { grid-template-columns: 1.5fr .5fr; }.hero .lake-visual { width: 230px; height: 320px; }.story-heading { gap: 35px; }.habitat-explorer { gap: 24px; }.habitat-choice { gap: 10px; }.habitat-choice strong { font-size: 25px; }.habitat-copy { padding: 28px; }.habitat-copy h3 { font-size: 36px; }.lake-facts strong { font-size: 30px; } }
+@media(max-width:760px) {
+  .nav-lake { display: none; }.hero { min-height: 0; }.hero-grid { position: relative; display: block; padding-block: 68px 32px; min-height: 0; }.hero-content { max-width: 560px; }.hero h1 { font-size: clamp(67px,12vw,92px); max-width: 520px; }.hero .intro { font-size: 17px; max-width: 340px; }.hero:before { background: linear-gradient(90deg,#0b303ade,#10394340),linear-gradient(0deg,#092f39,transparent 80%); }.panoramic-landscape img { object-position: 57% center; }.hero .lake-visual { position: relative; width: 150px; height: 180px; margin-top: 0; margin-left: auto; margin-bottom: -40px; }.hero .lake-visual figcaption { inset: auto 0 -2px auto; }.hero .water-scene { inset: -28px 0 auto auto; height: 150px; }.hero .scene-toggle { font-size: 10px; padding: 7px 9px; white-space: nowrap; }.lake-signature { padding-bottom: 85px; align-items: start; }.lake-signature strong { font-size: clamp(43px,8vw,60px); }.lake-signature>a { font-size: 0; gap: 0; padding-top: 25px; }.lake-signature>div>span { font-size: 11px; max-width: 190px; }.hero-waves { height: 65px; }.sky-birds { width: 110px; top: 5%; }.shore-reeds { transform: scale(.7); transform-origin: bottom right; }.floating-water span:nth-child(1) { top: 28%; }.story-heading { display: block; margin-bottom: 30px; }.story-heading h2 { font-size: 50px; }.story-heading>p:last-child { margin-top: 23px; max-width: 450px; }.lake-story { padding-top: 50px; }.habitat-explorer { display: flex; flex-direction: column; gap: 20px; }.habitat-menu { width: 100%; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }.habitat-choice,.habitat-choice:last-of-type { display: block; padding: 15px 8px; border: 1px solid #cad9ce; border-radius: 5px; }.habitat-choice[aria-pressed=true] { padding-left: 8px; background: #e1eade; border-color: #739b7e; }.habitat-choice strong { font: 500 13px var(--font); line-height: 1.5; margin-top: 9px; }.habitat-icon { width: 29px; height: 29px; font-size: 30px; }.habitat-choice small,.choice-mark { display: none; }.explorer-hint { grid-column: 1/-1; font-size: 12px; margin: 4px 0 0; }.habitat-stage { width: 100%; height: 505px; border-top-left-radius: 80px; }.habitat-copy { padding: 25px; }.habitat-copy h3 { font-size: 39px; }.lake-facts { grid-template-columns: 1fr 1fr; row-gap: 25px; padding-block: 25px; }.lake-facts>div:nth-child(2) { border: 0; }.lake-facts strong { font-size: 31px; }.lake-facts span { font-size: 11px; }.science-bridge { gap: 17px; flex-wrap: wrap; padding-top: 35px; }.science-bridge svg { width: 50px; }.science-bridge p { font-size: 13px; }.science-bridge a { margin-left: 67px; }#simulador { padding-top: 55px; }
+}
+@media(max-width:420px) { .hero-grid { padding-top: 46px; }.hero h1 { font-size: 70px; }.hero .intro { max-width: 280px; font-size: 16px; }.hero-footnote { font-size: 10px; gap: 7px; }.hero-footnote>span { padding-inline: 9px; }.hero .lake-visual { height: 155px; margin-bottom: -30px; }.story-heading h2 { font-size: 43px; }.habitat-stage { height: 470px; }.habitat-copy { padding: 23px; }.habitat-copy h3 { font-size: 34px; }.habitat-copy p { font-size: 13px; }.scene-overline { font-size: 10px; }.science-bridge svg { display: none; }.science-bridge a { margin-left: 0; }.lake-signature>div>span { max-width: 175px; }.lake-facts strong { font-size: 29px; }.lake-facts small { display: block; margin-top: 5px; } }
+@media(max-width:360px) { .hero h1 { font-size: 62px; }.hero .intro { max-width: 255px; }.habitat-copy h3 { font-size: 32px; }.story-heading h2 { font-size: 39px; }.lake-signature strong { font-size: 39px; }.landscape-switch button { padding-inline: 12px; } }
+@media(prefers-reduced-motion:reduce) { .hero *, .habitat-scene { animation: none!important; }.panoramic-landscape .landscape-evening,.habitat-scene>img { transition: none; } }

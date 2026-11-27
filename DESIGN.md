@@ -31,3 +31,11 @@ La portada combina una superficie de color profundo con la fotografía y el mate
 ## Movimiento del agua
 
 La portada añade tres capas de ondas SVG, corrientes dibujadas en canvas y ondas al mover el cursor o tocar el fondo. Las gotas suspendidas, el reflejo sobre la fotografía y la oscilación del material WebGL comparten el control de pausa. Las entradas de texto siguen completándose aunque se pause el movimiento. El canvas se limita a 25 fps y deja de actualizarse fuera de vista o con la pestaña oculta. Se respeta la preferencia de movimiento reducido. Las fichas entran en secuencia y el indicador del ICA se desplaza al presentar el resultado, sin modificar el valor numérico ni sus cálculos.
+
+## Identidad del territorio y video de portada
+
+La revisión del 27 de noviembre de 2026 usa una portada panorámica y un explorador de tres escenas: paisaje, zambullidor de Junín y humedales. Se contrastaron ubicación, altitud, superficie de la reserva y designación Ramsar con IGN y MINAM; el endemismo del ave con el inventario de MINCETUR; y el contexto paisajístico con SERNANP. Los enlaces están en la propia página. Las cifras de la reserva no se presentan como extensión del espejo de agua. No se añaden mediciones ambientales ni un estado actual del lago a partir de las imágenes.
+
+El video aportado por la usuaria se recortó de 1024×576 a 752×424 (x=136, y=76). Esto excluye las posiciones superior izquierda e inferior derecha del logo y del usuario de TikTok, conservando aproximadamente la proporción 16:9. Se exportó en H.264, 24 fps, CRF 24, sin audio, sin metadatos y con faststart; duración aproximada de 20,2 s, tamaño de 1,24 MB. El original no se modifica. El cartel de respaldo se extrae del segundo 8 del resultado.
+
+El video se reproduce silenciado y en bucle solo en la portada visible, con el documento activo y sin preferencia de movimiento reducido. Comparte el botón de pausa con el WebGL. Se detiene al elegir el atardecer y si el navegador rechaza la reproducción se mantiene la imagen de respaldo. No depende del código del simulador. `territorio.css` contiene la composición del paisaje y del explorador; `territorio.js` contiene únicamente sus controles y la reproducción. Fotografías y licencias en `assets/CREDITOS.md` y en el desplegable de créditos de la web.
