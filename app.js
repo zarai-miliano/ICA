@@ -128,7 +128,11 @@ if (typeof document !== 'undefined') {
       input.id='value-'+p;
       div.querySelector('label').htmlFor=input.id;
       div.querySelector('label').textContent=data.names[p].label;
-      div.querySelector('span').textContent=data.names[p].unit;
+      const unit=div.querySelector('.unit');
+      unit.id='unit-'+p;
+      unit.textContent=data.names[p].unit;
+      input.setAttribute('aria-describedby',unit.id);
+      input.inputMode='decimal';
       input.value=values[p];
       if (p==='pH') input.max='14';
       input.addEventListener('input',()=>{

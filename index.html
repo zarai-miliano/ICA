@@ -3,62 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Demostración del modelo ICA-PE entrenado con los monitoreos del lago Chinchaycocha.">
-  <title>Índice de calidad de Agua</title>
-  <meta name="theme-color" content="#07121d">
-  <link rel="preload" as="image" href="chinchaycocha.jpg">
+  <meta name="description" content="Simulador del ICA-PE parcial del lago Chinchaycocha: mediciones de calidad del agua, modelos predictivos e interpretación de resultados.">
+  <meta name="theme-color" content="#f7f8f5">
+  <title>Índice de calidad de Agua · Chinchaycocha</title>
+  <link rel="preload" as="image" href="chinchaycocha.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="estilos.css?v=20261127">
-  <link rel="stylesheet" href="profundidad.css?v=1">
-  <link rel="stylesheet" href="futuro.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css?v=editorial-1">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
-  <script defer src="app.js?v=20261127"></script>
-  <script defer src="escena-3d.js?v=2"></script>
+  <script defer src="app.js?v=editorial-1"></script>
+  <script defer src="escena-3d.js?v=editorial-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#simulador">Ir al simulador</a>
-  <header class="top"><div class="nav-inner wrap"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M4 13c4-7 8 7 12 0s8 7 12 0M4 20c4-7 8 7 12 0s8 7 12 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><span>Chinchaycocha<small>CALIDAD DEL AGUA</small></span></a><nav aria-label="Secciones"><a href="#simulador">Simulador</a><a href="#interpretacion">Interpretación</a><a class="nav-method" href="metodologia_ICA_PE_2018.pdf" target="_blank" rel="noopener">Guía metodológica <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 4h5v5M16 4l-7 7M8 4H4v12h12v-4"/></svg></a></nav></div></header>
+  <header class="top">
+    <div class="nav-inner wrap">
+      <a class="brand" href="#inicio" aria-label="Chinchaycocha, inicio">
+        <svg class="brand-symbol" aria-hidden="true" viewBox="0 0 34 34"><path d="M3 14c5-6 9 6 14 0s9 6 14 0M3 22c5-6 9 6 14 0s9 6 14 0"/></svg>
+        <span>Chinchaycocha<small>CALIDAD DEL AGUA</small></span>
+      </a>
+      <nav aria-label="Secciones">
+        <a href="#simulador">Simulador</a>
+        <a href="#interpretacion">Interpretación</a>
+        <a class="nav-method" href="metodologia_ICA_PE_2018.pdf" target="_blank" rel="noopener">Metodología <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M11 4h5v5M16 4l-7 7M8 4H4v12h12v-4"/></svg></a>
+      </nav>
+    </div>
+  </header>
   <main id="inicio">
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-grid">
-        <div class="hero-content"><p class="hero-label"><span aria-hidden="true"></span> CIENCIA DE DATOS · INGENIERÍA AMBIENTAL</p><h1 id="hero-title">Índice de calidad<br>de <em>Agua</em></h1><p class="intro">Del monitoreo a una visión más clara del agua. Explora el ICA-PE con mediciones y modelos predictivos.</p><div class="hero-actions"><a class="hero-button" href="#simulador">Explorar el simulador <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a><span>Datos del lago.<br>Una nueva perspectiva.</span></div></div>
-        <div class="water-scene" aria-hidden="true">
-          <div class="water-aura"></div><div class="water-grid"></div><div class="holo-dial"><i></i><i></i><i></i></div>
-          <div class="orbit orbit-back"></div>
-          <div class="orbit orbit-outer"></div>
-          <svg class="water-fallback" viewBox="0 0 300 380"><defs><radialGradient id="water-glass" cx="30%" cy="25%" r="85%"><stop stop-color="#e1fff2"/><stop offset=".3" stop-color="#73d6c7" stop-opacity=".8"/><stop offset=".7" stop-color="#1b747d" stop-opacity=".65"/><stop offset="1" stop-color="#b3eee0"/></radialGradient></defs><path d="M150 20C138 76 42 166 42 245a108 108 0 0 0 216 0C258 166 162 76 150 20Z" fill="url(#water-glass)" stroke="#b5ecdc" stroke-opacity=".7"/><path d="M118 112c-34 52-54 98-45 136" fill="none" stroke="#edfff4" stroke-opacity=".75" stroke-width="8" stroke-linecap="round"/></svg>
-          <canvas id="water-canvas"></canvas>
-          <div class="orbit orbit-front"><span></span></div>
-          <span class="water-particle particle-one"></span><span class="water-particle particle-two"></span><span class="water-particle particle-three"></span>
-          <div class="holo-caption holo-caption-top"><span>H₂O</span><small>AGUA · CIENCIA · DATOS</small></div><div class="holo-caption holo-caption-bottom"><span>ICA—PE</span><small>VISUALIZACIÓN CONCEPTUAL</small></div>
-          <div class="scene-label"><span class="scene-line"></span>AGUA EN PERSPECTIVA<span class="scene-chip">3D</span></div>
+        <div class="hero-content">
+          <p class="eyebrow">Lago Chinchaycocha · Perú</p>
+          <h1 id="hero-title">Índice de calidad<br>de <em>Agua</em></h1>
+          <p class="intro">Una herramienta para estudiar la calidad del agua del lago, a partir de mediciones y modelos predictivos.</p>
+          <a class="hero-button" href="#simulador">Abrir simulador <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a>
+          <p class="hero-footnote">Ingeniería Ambiental<span aria-hidden="true"> / </span>Modelación de la calidad del agua</p>
         </div>
-        <button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false" aria-controls="water-canvas"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Pausar movimiento</span></button>
-        <div class="lake-caption"><span class="location-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span><div><strong>Lago Chinchaycocha</strong><span>Junín y Pasco · Perú</span></div><span class="lake-tag">ECOSISTEMA LACUSTRE</span></div>
+        <figure class="lake-visual">
+          <img class="lake-image" src="chinchaycocha.jpg" alt="Vista panorámica del lago Chinchaycocha y sus humedales, con montañas al fondo." width="1280" height="418" fetchpriority="high">
+          <div class="photo-shade" aria-hidden="true"></div>
+          <div class="water-scene" aria-hidden="true">
+            <svg class="water-fallback" viewBox="0 0 300 380"><defs><radialGradient id="water-glass" cx="28%" cy="25%" r="85%"><stop stop-color="#efffff" stop-opacity=".85"/><stop offset=".35" stop-color="#8abac4" stop-opacity=".18"/><stop offset=".8" stop-color="#347183" stop-opacity=".3"/><stop offset="1" stop-color="#e7f9fa" stop-opacity=".8"/></radialGradient></defs><path d="M150 20C138 76 42 166 42 245a108 108 0 0 0 216 0C258 166 162 76 150 20Z" fill="url(#water-glass)" stroke="#d1edf0" stroke-opacity=".7"/><path d="M118 112c-34 52-54 98-45 136" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="5" stroke-linecap="round"/></svg>
+            <canvas id="water-canvas"></canvas>
+          </div>
+          <span class="photo-label" aria-hidden="true">El agua, en perspectiva.</span>
+          <figcaption>
+            <div><strong>Lago Chinchaycocha</strong><span>Junín y Pasco · Perú</span></div>
+            <button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false" aria-controls="water-canvas"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Pausar movimiento</span></button>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <div class="process-strip"><div class="wrap process-inner"><p>Comprender el agua,<br><strong>desde los datos.</strong></p><div><span class="process-icon" aria-hidden="true">◌</span> Mediciones del monitoreo</div><span class="process-line" aria-hidden="true"></span><div><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="m7 5 10 7M7 19l10-7M12 7v10"/></svg> Modelos predictivos</div><span class="process-line" aria-hidden="true"></span><div><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19V9m7 10V4m7 15v-7M3 21h18"/></svg> Índice de calidad</div></div></div>
-    <section id="simulador" class="wrap section">
-      <div class="section-heading"><div><p class="eyebrow">EXPLORA EL MODELO</p><h2>Los datos entran.<br>La calidad se hace visible.</h2></div><p class="section-intro">Elige tus mediciones, ingresa sus valores y explora el resultado del <strong>ICA-PE parcial de doce parámetros.</strong></p></div>
-      <div class="switch" role="group" aria-label="Modo de predicción"><button id="full-mode" type="button" aria-pressed="false"><span class="mode-top"><span class="mode-count">12</span><span class="mode-check" aria-hidden="true">✓</span></span><strong>Parámetros medidos</strong><span class="mode-description">ANN y cálculo por fórmula</span><span class="mode-tag">COMPARACIÓN DIRECTA</span></button><button id="nine-mode" type="button" aria-pressed="true"><span class="mode-top"><span class="mode-count">9<span> + 3</span></span><span class="mode-check" aria-hidden="true">✓</span></span><strong>Mediciones + estimaciones</strong><span class="mode-description">Ridge estima tres parámetros</span><span class="mode-tag">PANEL DE NUEVE ENTRADAS</span></button><button id="three-mode" type="button" aria-pressed="false"><span class="mode-top"><span class="mode-count">3<span> + 9</span></span><span class="mode-check" aria-hidden="true">✓</span></span><strong>Exploración reducida</strong><span class="mode-description">ANN estima nueve parámetros</span><span class="mode-tag">EXPLORACIÓN CON TRES ENTRADAS</span></button></div>
+    <section id="simulador" class="wrap section" aria-labelledby="simulator-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Herramienta de análisis</p><h2 id="simulator-title">Simulador del ICA-PE</h2></div>
+        <p class="section-intro">Elige las mediciones disponibles. El resultado corresponde al <strong>panel parcial de doce parámetros.</strong></p>
+      </div>
+      <div class="switch" role="group" aria-label="Mediciones disponibles">
+        <button id="full-mode" type="button" aria-pressed="false"><span class="mode-count">12</span><span><strong>Parámetros medidos</strong><span class="mode-description">ANN y fórmula de referencia</span></span></button>
+        <button id="nine-mode" type="button" aria-pressed="true"><span class="mode-count">9</span><span><strong>Medidos + 3 estimados</strong><span class="mode-description">Reconstrucción con Ridge</span></span></button>
+        <button id="three-mode" type="button" aria-pressed="false"><span class="mode-count">3</span><span><strong>Medidos + 9 estimados</strong><span class="mode-description">Reconstrucción con ANN</span></span></button>
+      </div>
       <div class="demo-grid">
-        <form class="panel" id="form">
-          <div class="panel-top"><div><p class="eyebrow">TUS MEDICIONES</p><h3>Entradas del monitoreo</h3></div><button class="secondary" id="example" type="button"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 7a6 6 0 1 1 0 6M4 3v4h4"/></svg>Cargar ejemplo</button></div>
+        <form class="panel" id="form" aria-labelledby="inputs-title" aria-describedby="instructions">
+          <div class="panel-top"><h3 id="inputs-title">Mediciones del monitoreo</h3><button class="secondary" id="example" type="button"><svg aria-hidden="true" viewBox="0 0 20 20"><path d="M4 7a6 6 0 1 1 0 6M4 3v4h4"/></svg>Cargar ejemplo</button></div>
           <p id="instructions"></p><p class="small" id="sample"></p>
           <div class="fields" id="fields"></div>
-          <div class="form-actions"><span><svg aria-hidden="true" viewBox="0 0 20 20"><path d="m10 2 6 3v5c0 4-6 7-6 7s-6-3-6-7V5Z"/><path d="m7 9 2 2 4-4"/></svg>Cálculo en tu navegador</span><button class="primary" type="submit">Calcular ICA <svg aria-hidden="true" viewBox="0 0 20 20"><rect x="4" y="2" width="12" height="16" rx="2"/><path d="M7 6h6M7 10h1m4 0h1m-6 4h1m4 0h1"/></svg></button></div>
+          <div class="form-actions"><span>Los valores se procesan en tu navegador.</span><button class="primary" type="submit">Calcular ICA</button></div>
         </form>
-        <article class="panel results" id="result" aria-live="polite"></article>
+        <article class="panel results" id="result" aria-label="Resultado del ICA-PE" aria-live="polite" aria-atomic="true"></article>
       </div>
-      <aside class="scope-note"><span aria-hidden="true">i</span><p><strong>Un panel parcial, un alcance definido.</strong> Aplicación referencial a un monitoreo con 12 parámetros. La guía recomienda 17 filas de parámetros para categoría 4. El panel del proyecto incluye cobre y cuenta con resultados incompletos para varias filas recomendadas.</p></aside>
+      <aside class="scope-note"><span aria-hidden="true">i</span><p><strong>Alcance del panel.</strong> Aplicación referencial a un monitoreo con 12 parámetros. La guía recomienda 17 filas de parámetros para categoría 4. El panel del proyecto incluye cobre y cuenta con resultados incompletos para varias filas recomendadas.</p></aside>
       <section id="interpretacion" class="panel ica-guide" aria-labelledby="ica-guide-title">
-        <div class="guide-heading"><div><p class="eyebrow">COMPRENDE TU RESULTADO</p><h3 id="ica-guide-title">¿Qué nos dice el ICA?</h3></div><span class="source-tag">ICA-PE · ANA 2018</span></div>
-        <p class="guide-intro">Cada valor tiene una interpretación. Tu resultado se destaca automáticamente en la escala.</p>
+        <div class="guide-heading"><div><p class="eyebrow">Lectura del índice</p><h2 id="ica-guide-title">Interpretación del ICA</h2></div><span class="source-tag">ANA · 2018</span></div>
+        <p class="guide-intro">La categoría correspondiente a tu resultado se destaca en la tabla.</p>
         <p id="ica-guide-status" class="sub-result" role="status"></p>
-        <div class="table-scroll ica-table-wrap">
+        <div class="table-scroll ica-table-wrap" tabindex="0" role="region" aria-label="Categorías del ICA; desplázate horizontalmente en pantallas pequeñas">
           <table class="ica-table">
             <thead><tr><th scope="col">Rango del ICA</th><th scope="col">Calificación</th><th scope="col">Interpretación</th></tr></thead>
             <tbody>
@@ -75,6 +97,6 @@
       </section>
     </section>
   </main>
-  <footer><div class="wrap footer-inner"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true">≈</span>Chinchaycocha</a><p>Ingeniería Ambiental<br><span>Ciencia de datos para comprender el agua.</span></p><a href="#inicio">Volver al inicio</a></div></footer>
+  <footer><div class="wrap footer-inner"><a class="brand" href="#inicio">Chinchaycocha<span class="footer-dot" aria-hidden="true">.</span></a><p>Ingeniería Ambiental · Calidad del agua</p><a href="#inicio">Volver al inicio</a></div></footer>
 </body>
 </html>

@@ -39,23 +39,9 @@
     scene.style.setProperty('--scene-y', '0px');
   });
 
-  document.querySelectorAll('.switch button').forEach(card => {
-    card.addEventListener('pointermove', event => {
-      if (reducedMotion.matches || userPaused || !finePointer.matches) return;
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width;
-      const y = (event.clientY - rect.top) / rect.height;
-      card.style.setProperty('--tilt-x', `${(y - .5) * -7}deg`);
-      card.style.setProperty('--tilt-y', `${(x - .5) * 7}deg`);
-      card.style.setProperty('--shine-x', `${x * 100}%`);
-      card.style.setProperty('--shine-y', `${y * 100}%`);
-    }, {passive: true});
-    card.addEventListener('pointerleave', () => {
-      ['--tilt-x', '--tilt-y', '--shine-x', '--shine-y'].forEach(key => card.style.removeProperty(key));
-    });
-  });
-
-  const gl = canvas.getContext('webgl', {alpha: true, antialias: true, powerPreference: 'low-power'});
+  let gl;
+  try { gl = canvas.getContext('webgl', {alpha: true, antialias: true, powerPreference: 'low-power'}); }
+  catch (_) { return; }
   if (!gl) return; // The SVG sculpture is always present as a fallback.
 
   const vertex = `
@@ -88,26 +74,23 @@
     varying vec3 vPosition;
     varying vec3 vNormal;
     void main() {
-      vec3 n = normalize(vNormal);
+      vec3 n = normalize(vNormal + vec3(.008 * sin(vPosition.y * 6. + uTime * .5), .006 * cos(vPosition.x * 7. + uTime * .4), 0.));
       vec3 view = normalize(vec3(0.,0.,5.6) - vPosition);
       vec3 reflected = reflect(-view, n);
       vec2 uv = vec2(.5 + atan(reflected.z, reflected.x) / 6.28318, .5 + asin(clamp(reflected.y,-1.,1.)) / 3.14159);
       vec3 environment = texture2D(uEnvironment, uv).rgb;
-      float fresnel = pow(1. - max(dot(n,view),0.), 2.4);
-      float light = .5 + .5 * dot(n, normalize(vec3(-.6,1.,1.2)));
-      vec3 water = mix(vec3(.015,.12,.26), vec3(.10,.59,.76), light);
-      vec3 color = mix(water, environment * vec3(.40,.94,1.25), .30);
-      float reflection = pow(max(dot(n,normalize(vec3(-.65,.65,1.4))),0.),30.);
-      float strip = pow(max(dot(n,normalize(vec3(.8,.3,1.0))),0.),65.);
-      color += vec3(.75,1.,.93) * reflection * .78;
-      color += vec3(.70,.96,1.) * strip * .38;
-      color = mix(color, vec3(.32,.91,1.), fresnel * .85);
-      float contour = pow(.5 + .5 * sin(vPosition.y * 39.), 22.);
-      float scan = pow(max(0.,1. - abs(vPosition.y - (mod(uTime * .24,3.8) - 1.9)) * 12.),3.);
-      color += vec3(.12,.65,.85) * (contour * .14 + scan * .32);
-      float lowerGlow = max(0., -vPosition.y) * .08;
-      color += vec3(.12,.65,.52) * lowerGlow;
-      gl_FragColor = vec4(color, .93);
+      // Refract the lake photograph with a water-like optical index.
+      // This is a decorative material, not a hydrological simulation.
+      vec3 ray = refract(-view, n, 1. / 1.333);
+      vec2 transmittedUV = vec2(.52 + vPosition.x * .16, .45 + vPosition.y * .12) + ray.xy * .22;
+      vec3 transmitted = texture2D(uEnvironment, clamp(transmittedUV, .01, .99)).rgb;
+      float fresnel = .0204 + .9796 * pow(1. - max(dot(n,view),0.), 5.);
+      vec3 color = mix(transmitted * vec3(.92,1.015,1.025), environment, fresnel * .65);
+      float softbox = pow(max(dot(n,normalize(vec3(-.65,.65,1.4))),0.),38.);
+      float rim = pow(max(dot(n,normalize(vec3(.8,.3,1.0))),0.),75.);
+      color += vec3(.95,1.,1.) * (softbox * .40 + rim * .12);
+      color = mix(color, vec3(.80,.91,.94), fresnel * .40);
+      gl_FragColor = vec4(color, 1.);
     }`;
 
   function shader(type, source) {
