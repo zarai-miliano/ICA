@@ -14,7 +14,8 @@
   motionButton?.addEventListener('click',()=>{
     const paused=story.classList.toggle('transitions-paused');
     motionButton.setAttribute('aria-pressed',String(paused));
-    motionButton.textContent=paused?'Activar transiciones':'Pausar transiciones';
+    motionButton.textContent=paused?'Activar animación 3D':'Pausar animación 3D';
+    story.dispatchEvent(new CustomEvent('storymotionchange'));
   });
   let pending=false,visible=false,current=-1;
   function render() {
@@ -30,6 +31,7 @@
       }
     }
     visual.style.setProperty('--story-p',progress.toFixed(3));
+    story.dispatchEvent(new CustomEvent('storyprogress',{detail:{progress}}));
     const next=Math.round(progress);
     if(next===current) return;
     current=next;visual.dataset.stage=String(current);story.dataset.stage=String(current);caption.textContent=labels[current];

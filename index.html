@@ -6,7 +6,6 @@
   <meta name="description" content="Simulador del ICA-PE parcial del lago Chinchaycocha: mediciones de calidad del agua, modelos predictivos e interpretación de resultados.">
   <meta name="theme-color" content="#123b42">
   <title>Índice de calidad de Agua · Chinchaycocha</title>
-  <link rel="preload" as="image" href="assets/monitoreo-chinchaycocha.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -14,11 +13,13 @@
   <link rel="stylesheet" href="territorio.css?v=2">
   <link rel="stylesheet" href="historia.css?v=2">
   <link rel="stylesheet" href="relato.css?v=1">
+  <link rel="stylesheet" href="escenas-reales.css?v=1">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
   <script defer src="app.js?v=water-motion-1"></script>
   <script defer src="territorio.js?v=3"></script>
-  <script defer src="historia.js?v=2"></script>
+  <script defer src="historia.js?v=3"></script>
+  <script type="module" src="escenas-reales.js?v=1"></script>
 </head>
 <body>
   <a class="skip-link" href="#simulador">Ir al simulador</a>
@@ -43,6 +44,7 @@
         <div class="story-visual" data-stage="0">
           <nav class="story-route" aria-label="Etapas del recorrido"><a href="#story-campo" aria-current="step">Campo</a><a href="#story-laboratorio">Laboratorio</a><a href="#story-modelo">Modelo</a><a href="#story-ica">ICA</a></nav>
           <div class="story-world" aria-hidden="true">
+            <div id="scene3d-host"></div>
             <div class="story-landscape"></div><div class="story-lab-landscape"></div><div class="world-glow"></div><div class="scene-ground"></div>
             <div class="sample-water"><i></i><i></i><i></i></div>
             <div class="sample-bottle"><div class="bottle-cap"></div><div class="bottle-neck"></div><div class="bottle-body"><div class="bottle-liquid"></div><div class="bottle-shine"></div><div class="bottle-label"><span>CHINCHAYCOCHA</span><strong>Muestra<br>de agua</strong><small>Registro de campo</small></div></div></div>
@@ -51,7 +53,7 @@
             <div class="story-laptop"><div class="laptop-lid"><div class="laptop-camera"></div><div class="laptop-screen"><div class="screen-top"><span>Chinchaycocha</span><small>ICA-PE</small></div><div class="screen-content"><span class="screen-kicker">EJEMPLO HISTÓRICO</span><strong class="screen-title">Del registro a la estimación</strong><div class="screen-fields"><span>OD <b>6.75</b></span><span>pH <b>8.69</b></span><span>P total <b>0.005</b></span><span>N total <b>1.42</b></span><span>Hg <b>0.000045</b></span><span>Pb <b>0.0003</b></span><span>Zn <b>0.0055</b></span><span>Cu <b>0.00087</b></span><span>SST <b>1</b></span></div><div class="screen-inference"><span>Concentraciones estimadas</span><div><span>DBO₅ <b>1.2821</b></span><span>As <b>0.0031945</b></span><span>Coliformes <b>2.3483</b></span></div></div><div class="screen-result"><span>ICA con estimaciones</span><strong>54.56 <small>Regular</small></strong></div></div><div class="screen-bottom">9 medidos + 3 estimados · ejemplo referencial</div></div></div><div class="laptop-base"><div class="laptop-keyboard"></div><div class="laptop-trackpad"></div></div><div class="laptop-edge"></div></div>
             <div class="story-result-orbit"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="51"/><circle class="story-score-arc" cx="60" cy="60" r="51"/></svg><span>ICA-PE<strong>54.56</strong><small>Regular</small></span></div>
           </div>
-          <div class="story-caption"><span id="story-scene-label">La muestra comienza en el lago</span><span>Escenas recreadas · ejemplo histórico</span><button class="story-motion" type="button" aria-pressed="false">Pausar transiciones</button></div><div class="story-progress" aria-hidden="true"><i></i></div>
+          <div class="story-caption"><span id="story-scene-label">La muestra comienza en el lago</span><span id="scene3d-status">Preparando escena 3D…</span><button class="story-rotate" type="button" hidden>Girar escena</button><button class="story-motion" type="button" aria-pressed="false">Pausar animación 3D</button></div><div class="story-progress" aria-hidden="true"><i></i></div>
         </div>
         <div class="story-chapters">
           <article class="story-chapter" id="story-campo" data-chapter="0"><p class="chapter-label">Chinchaycocha · Perú</p><h1 id="research-title">Índice de calidad<br>de <em>Agua</em></h1><p class="story-opening">Todo comienza en el lago.</p><p>Una muestra, un punto y una fecha. El monitoreo reúne las primeras mediciones para conocer el agua de Chinchaycocha.</p><a class="chapter-scroll" href="#story-laboratorio">Desliza para seguir la muestra <span aria-hidden="true">↓</span></a><span class="chapter-detail">Campo: identificar, medir y recolectar.</span></article>
@@ -123,7 +125,7 @@
         </div>
       </div>
       <div class="lake-facts"><div><span>Territorio</span><strong>Junín <em>y</em> Pasco</strong></div><div><span>Altitud de la reserva</span><strong>≈ 4 100 <small>m s. n. m.</small></strong></div><div><span>Reserva Nacional de Junín</span><strong>53 000 <small>hectáreas</small></strong></div><div><span>Sitio Ramsar desde</span><strong>1997</strong></div></div>
-      <details class="landscape-credits"><summary>Fuentes del territorio y créditos de las imágenes</summary><p>Información de la reserva: <a href="https://app4.ign.gob.pe/capitulos/cuatro/conservacion.php" target="_blank" rel="noopener">Atlas del IGN</a>. Paisaje: SERNANP. Endemismo: MINCETUR. Designación Ramsar: MINAM (enlaces en cada escena). Las cifras corresponden a la reserva y no a la superficie del espejo de agua.</p><p><a href="https://commons.wikimedia.org/wiki/File:Atardecer_en_el_lago_Jun%C3%ADn.jpg" target="_blank" rel="noopener">Atardecer: Jonathan Chancasana</a> · <a href="https://commons.wikimedia.org/wiki/File:Junin_Grebe_(Podiceps_taczanowskii),_Jun%C3%ADn,_Peru_1.jpg" target="_blank" rel="noopener">Zambullidor: thibaudaronson</a> · <a href="https://commons.wikimedia.org/wiki/File:Lago_de_Junin-Juni_Peru.jpg" target="_blank" rel="noopener">Lago: Bernd Wolniczak</a>. Fotografías bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, mostradas con recorte visual. Las escenas de monitoreo y laboratorio de la apertura son recreaciones visuales generadas para explicar el proceso, no fotografías de un monitoreo real.</p></details>
+      <details class="landscape-credits"><summary>Fuentes del territorio y créditos de las imágenes</summary><p>Información de la reserva: <a href="https://app4.ign.gob.pe/capitulos/cuatro/conservacion.php" target="_blank" rel="noopener">Atlas del IGN</a>. Paisaje: SERNANP. Endemismo: MINCETUR. Designación Ramsar: MINAM (enlaces en cada escena). Las cifras corresponden a la reserva y no a la superficie del espejo de agua.</p><p><a href="https://commons.wikimedia.org/wiki/File:Atardecer_en_el_lago_Jun%C3%ADn.jpg" target="_blank" rel="noopener">Atardecer: Jonathan Chancasana</a> · <a href="https://commons.wikimedia.org/wiki/File:Junin_Grebe_(Podiceps_taczanowskii),_Jun%C3%ADn,_Peru_1.jpg" target="_blank" rel="noopener">Zambullidor: thibaudaronson</a> · <a href="https://commons.wikimedia.org/wiki/File:Lago_de_Junin-Juni_Peru.jpg" target="_blank" rel="noopener">Lago: Bernd Wolniczak</a>. Fotografías bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, mostradas con recorte visual. La apertura es una recreación 3D construida con geometría y animación. Si no es posible iniciar WebGL, se muestran ilustraciones generadas como alternativa.</p></details>
       <div class="science-bridge"><svg aria-hidden="true" viewBox="0 0 100 40"><path d="M0 20q12-17 25 0t25 0t25 0t25 0"/></svg><p>Del paisaje a sus mediciones.<br><strong>Explora la calidad del agua con el ICA-PE.</strong></p><a href="#simulador">Usar el simulador</a></div>
     </section>
   </main>

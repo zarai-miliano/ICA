@@ -1,0 +1,19 @@
+/* A real WebGL scene replaces the photographic fallback once it is rendered. */
+#scene3d-host { position: absolute; inset: 0 0 0 34%; z-index: 3; overflow: hidden; touch-action: pan-y; }
+#scene3d-host canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+#scene3d-host canvas:active { cursor: grabbing; }
+.story-world { pointer-events: auto; }
+.webgl-ready .story-landscape,.webgl-ready .story-lab-landscape,.webgl-ready .sample-bottle,.webgl-ready .lab-platform,.webgl-ready .story-laptop,.webgl-ready .story-result-orbit,.webgl-ready .scene-ground { display: none!important; }
+.webgl-ready .story-world:after { z-index: 4; background: linear-gradient(90deg,#123b42 0%,#123b42b3 25%,transparent 46%); }
+.webgl-ready .world-glow { opacity: 1; background: radial-gradient(ellipse at 73% 30%,#5d94913d,transparent 72%),#123b42; }
+.webgl-ready.story-visual:is([data-stage='2'],[data-stage='3']) .world-glow { background: radial-gradient(ellipse at 72% 35%,#fdfff8,#d7e6db); }
+.webgl-ready.story-visual:is([data-stage='2'],[data-stage='3']) .story-world:after { opacity: 0; }
+.story-rotate,.story-motion { position: relative; z-index: 6; pointer-events: auto; min-height: 36px; border: 1px solid #d9e7d34d; border-radius: 24px; padding: 8px 13px; background: #204c51bb; color: #edf4e6; font: 11px var(--font); }
+.story-rotate[hidden] { display: none; }.story-rotate:hover,.story-motion:hover { background: #3c665d; }
+.story-caption { gap: 12px; }
+.story-caption #scene3d-status { font-size: 10px; }
+.story-visual:is([data-stage='2'],[data-stage='3']) .story-rotate { border-color: #a2b99f; background: #f4f8eccc; color: #355d4b; }
+.story-visual:is([data-stage='2'],[data-stage='3']) .story-rotate:hover { background: #dce9d4; }
+@media(max-width:760px) { #scene3d-host { inset: 38px 0 42%; }.webgl-ready .story-world:after { z-index: 4; background: linear-gradient(0deg,#123b42 24%,transparent 55%); }.story-caption { flex-wrap: wrap; gap: 7px; }.story-caption #scene3d-status { font-size: 8px; flex: 1 1 120px; max-width: 140px; }.story-motion,.story-rotate { font-size: 9px; padding: 7px 9px; }.story-visual:is([data-stage='2'],[data-stage='3']) #scene3d-host { bottom: 43%; } }
+@media(max-width:360px) { .story-caption #scene3d-status { flex-basis: 100%; max-width: none; }.story-caption { justify-content: end; }.story-caption #scene3d-status { position: absolute; left: 0; bottom: 9px; max-width: 106px; }.story-rotate { margin-left: auto; } }
+@media(max-width:760px) { #scene3d-host { mask-image: linear-gradient(#000 72%,transparent 100%); -webkit-mask-image: linear-gradient(#000 72%,transparent 100%); } }

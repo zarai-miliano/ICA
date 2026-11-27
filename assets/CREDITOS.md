@@ -11,3 +11,5 @@ Las fotografías se conservan como archivos originales; la interfaz aplica recor
 La apertura usa `monitoreo-chinchaycocha.webp` y `laboratorio-agua.webp`, creadas con la herramienta integrada de generación de imágenes para ilustrar el proceso. Son recreaciones visuales, no fotografías de una campaña real. Los originales PNG se conservan en `D:/ica/output/relato/`; los WebP mantienen las dimensiones y se codifican para carga web. Los prompts están en `PROMPTS_RELATO.md`.
 
 El video de portada fue retirado por instrucción de la usuaria. El archivo original permanece fuera del repositorio y no se modifica.
+
+La experiencia principal ahora usa personajes y escenarios geométricos animados en WebGL. La geometría está en `../escenas-reales.js`. Las dos imágenes generadas quedan como respaldo si el navegador no puede iniciar el renderizador. Three.js 0.182.0 se distribuye localmente con su [licencia MIT](vendor/LICENSE-three.txt). No se incluye ningún personaje 3D de terceros.
