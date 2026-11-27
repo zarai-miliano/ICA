@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Demostración del modelo ICA-PE entrenado con los monitoreos del lago Chinchaycocha.">
   <title>Índice de calidad de Agua</title>
-  <meta name="theme-color" content="#102f38">
+  <meta name="theme-color" content="#07121d">
   <link rel="preload" as="image" href="chinchaycocha.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="estilos.css?v=20261127">
   <link rel="stylesheet" href="profundidad.css?v=1">
+  <link rel="stylesheet" href="futuro.css?v=1">
   <script defer src="modelos.js"></script>
   <script defer src="panel_nueve.js"></script>
   <script defer src="app.js?v=20261127"></script>
-  <script defer src="escena-3d.js?v=1"></script>
+  <script defer src="escena-3d.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#simulador">Ir al simulador</a>
@@ -25,14 +26,17 @@
       <div class="wrap hero-grid">
         <div class="hero-content"><p class="hero-label"><span aria-hidden="true"></span> CIENCIA DE DATOS · INGENIERÍA AMBIENTAL</p><h1 id="hero-title">Índice de calidad<br>de <em>Agua</em></h1><p class="intro">Del monitoreo a una visión más clara del agua. Explora el ICA-PE con mediciones y modelos predictivos.</p><div class="hero-actions"><a class="hero-button" href="#simulador">Explorar el simulador <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2S4 8 4 12a6 6 0 0 0 12 0c0-4-6-10-6-10Z"/><path d="M7 12a3 3 0 0 0 3 3"/></svg></a><span>Datos del lago.<br>Una nueva perspectiva.</span></div></div>
         <div class="water-scene" aria-hidden="true">
-          <div class="water-aura"></div><div class="water-grid"></div>
+          <div class="water-aura"></div><div class="water-grid"></div><div class="holo-dial"><i></i><i></i><i></i></div>
           <div class="orbit orbit-back"></div>
+          <div class="orbit orbit-outer"></div>
           <svg class="water-fallback" viewBox="0 0 300 380"><defs><radialGradient id="water-glass" cx="30%" cy="25%" r="85%"><stop stop-color="#e1fff2"/><stop offset=".3" stop-color="#73d6c7" stop-opacity=".8"/><stop offset=".7" stop-color="#1b747d" stop-opacity=".65"/><stop offset="1" stop-color="#b3eee0"/></radialGradient></defs><path d="M150 20C138 76 42 166 42 245a108 108 0 0 0 216 0C258 166 162 76 150 20Z" fill="url(#water-glass)" stroke="#b5ecdc" stroke-opacity=".7"/><path d="M118 112c-34 52-54 98-45 136" fill="none" stroke="#edfff4" stroke-opacity=".75" stroke-width="8" stroke-linecap="round"/></svg>
           <canvas id="water-canvas"></canvas>
           <div class="orbit orbit-front"><span></span></div>
           <span class="water-particle particle-one"></span><span class="water-particle particle-two"></span><span class="water-particle particle-three"></span>
+          <div class="holo-caption holo-caption-top"><span>H₂O</span><small>AGUA · CIENCIA · DATOS</small></div><div class="holo-caption holo-caption-bottom"><span>ICA—PE</span><small>VISUALIZACIÓN CONCEPTUAL</small></div>
           <div class="scene-label"><span class="scene-line"></span>AGUA EN PERSPECTIVA<span class="scene-chip">3D</span></div>
         </div>
+        <button class="scene-toggle" id="scene-toggle" type="button" aria-pressed="false" aria-controls="water-canvas"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Pausar movimiento</span></button>
         <div class="lake-caption"><span class="location-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span><div><strong>Lago Chinchaycocha</strong><span>Junín y Pasco · Perú</span></div><span class="lake-tag">ECOSISTEMA LACUSTRE</span></div>
       </div>
     </section>

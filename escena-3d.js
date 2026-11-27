@@ -9,9 +9,24 @@
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const hero = document.querySelector('.hero');
   const pointer = {x: 0, y: 0};
+  let userPaused = false;
+  const motionButton = document.getElementById('scene-toggle');
+  if (motionButton) {
+    motionButton.addEventListener('click', () => {
+      userPaused = !userPaused;
+      document.documentElement.dataset.motion = userPaused ? 'paused' : 'running';
+      motionButton.setAttribute('aria-pressed', String(userPaused));
+      motionButton.querySelector('span').textContent = userPaused ? 'Activar movimiento' : 'Pausar movimiento';
+      motionButton.querySelector('path').setAttribute('d',userPaused ? 'M6 4l9 6-9 6Z' : 'M7 5v10M13 5v10');
+      pointer.x = pointer.y = 0;
+      scene.style.setProperty('--scene-x','0px');
+      scene.style.setProperty('--scene-y','0px');
+      scene.dispatchEvent(new Event('motionchange'));
+    });
+  }
 
   hero.addEventListener('pointermove', event => {
-    if (reducedMotion.matches || !finePointer.matches) return;
+    if (reducedMotion.matches || userPaused || !finePointer.matches) return;
     const rect = hero.getBoundingClientRect();
     pointer.x = (event.clientX - rect.left) / rect.width - .5;
     pointer.y = (event.clientY - rect.top) / rect.height - .5;
@@ -26,7 +41,7 @@
 
   document.querySelectorAll('.switch button').forEach(card => {
     card.addEventListener('pointermove', event => {
-      if (reducedMotion.matches || !finePointer.matches) return;
+      if (reducedMotion.matches || userPaused || !finePointer.matches) return;
       const rect = card.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width;
       const y = (event.clientY - rect.top) / rect.height;
@@ -47,7 +62,7 @@
     attribute vec3 aPosition;
     attribute vec3 aNormal;
     uniform float uAspect;
-    uniform float uTime;
+    uniform mediump float uTime;
     uniform vec2 uPointer;
     varying vec3 vPosition;
     varying vec3 vNormal;
@@ -69,7 +84,7 @@
   const fragment = `
     precision mediump float;
     uniform sampler2D uEnvironment;
-    uniform float uTime;
+    uniform mediump float uTime;
     varying vec3 vPosition;
     varying vec3 vNormal;
     void main() {
@@ -80,13 +95,16 @@
       vec3 environment = texture2D(uEnvironment, uv).rgb;
       float fresnel = pow(1. - max(dot(n,view),0.), 2.4);
       float light = .5 + .5 * dot(n, normalize(vec3(-.6,1.,1.2)));
-      vec3 water = mix(vec3(.025,.20,.26), vec3(.24,.72,.65), light);
-      vec3 color = mix(water, environment * vec3(.8,1.12,1.08), .44);
+      vec3 water = mix(vec3(.015,.12,.26), vec3(.10,.59,.76), light);
+      vec3 color = mix(water, environment * vec3(.40,.94,1.25), .30);
       float reflection = pow(max(dot(n,normalize(vec3(-.65,.65,1.4))),0.),30.);
       float strip = pow(max(dot(n,normalize(vec3(.8,.3,1.0))),0.),65.);
       color += vec3(.75,1.,.93) * reflection * .78;
       color += vec3(.70,.96,1.) * strip * .38;
-      color = mix(color, vec3(.63,.94,.85), fresnel * .78);
+      color = mix(color, vec3(.32,.91,1.), fresnel * .85);
+      float contour = pow(.5 + .5 * sin(vPosition.y * 39.), 22.);
+      float scan = pow(max(0.,1. - abs(vPosition.y - (mod(uTime * .24,3.8) - 1.9)) * 12.),3.);
+      color += vec3(.12,.65,.85) * (contour * .14 + scan * .32);
       float lowerGlow = max(0., -vPosition.y) * .08;
       color += vec3(.12,.65,.52) * lowerGlow;
       gl_FragColor = vec4(color, .93);
@@ -192,7 +210,7 @@
   }
   function tick(now) {
     frame = 0;
-    if (!visible || document.hidden || lost || reducedMotion.matches) return;
+    if (!visible || document.hidden || lost || reducedMotion.matches || userPaused) return;
     if (now - previous >= 33) {
       elapsed += Math.min((now - previous) / 1000, .05);
       previous = now;
@@ -204,7 +222,7 @@
     cancelAnimationFrame(frame); frame = 0; previous = performance.now();
     if (visible && !document.hidden && !lost) {
       draw();
-      if (!reducedMotion.matches) frame = requestAnimationFrame(tick);
+      if (!reducedMotion.matches && !userPaused) frame = requestAnimationFrame(tick);
     }
   }
   const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; resume(); }, {rootMargin:'40px'});
@@ -212,6 +230,7 @@
   new ResizeObserver(resume).observe(canvas);
   document.addEventListener('visibilitychange',resume);
   reducedMotion.addEventListener('change',resume);
+  scene.addEventListener('motionchange',resume);
   canvas.addEventListener('webglcontextlost', event => {
     event.preventDefault(); lost = true; cancelAnimationFrame(frame);
     scene.classList.remove('is-rendered');
